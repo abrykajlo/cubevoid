@@ -4,10 +4,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 15.0.26228.9
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CubeVoid", "CubeVoid.vcxproj", "{AE07E2A3-E27F-4580-BE7F-E03FF45499BA}"
+	ProjectSection(ProjectDependencies) = postProject
+		{50D56461-5FBF-441A-9B43-2ABC26664EBA} = {50D56461-5FBF-441A-9B43-2ABC26664EBA}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3rd", "3rd", "{8FD72E2D-FB78-45BE-9B31-7FA8C2E09A3B}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "sdl2", "..\..\3rd\sdl2\sdl2.vcxproj", "{50D56461-5FBF-441A-9B43-2ABC26664EBA}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "glew", "..\..\3rd\glew\glew.vcxproj", "{3E9F3C04-5C8C-46D2-BD78-83C6C6198438}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,11 +38,20 @@ Global
 		{50D56461-5FBF-441A-9B43-2ABC26664EBA}.Release|x64.Build.0 = Release|x64
 		{50D56461-5FBF-441A-9B43-2ABC26664EBA}.Release|x86.ActiveCfg = Release|Win32
 		{50D56461-5FBF-441A-9B43-2ABC26664EBA}.Release|x86.Build.0 = Release|Win32
+		{3E9F3C04-5C8C-46D2-BD78-83C6C6198438}.Debug|x64.ActiveCfg = Debug|x64
+		{3E9F3C04-5C8C-46D2-BD78-83C6C6198438}.Debug|x64.Build.0 = Debug|x64
+		{3E9F3C04-5C8C-46D2-BD78-83C6C6198438}.Debug|x86.ActiveCfg = Debug|x64
+		{3E9F3C04-5C8C-46D2-BD78-83C6C6198438}.Debug|x86.Build.0 = Debug|x64
+		{3E9F3C04-5C8C-46D2-BD78-83C6C6198438}.Release|x64.ActiveCfg = Release|x64
+		{3E9F3C04-5C8C-46D2-BD78-83C6C6198438}.Release|x64.Build.0 = Release|x64
+		{3E9F3C04-5C8C-46D2-BD78-83C6C6198438}.Release|x86.ActiveCfg = Release|Win32
+		{3E9F3C04-5C8C-46D2-BD78-83C6C6198438}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{50D56461-5FBF-441A-9B43-2ABC26664EBA} = {8FD72E2D-FB78-45BE-9B31-7FA8C2E09A3B}
+		{3E9F3C04-5C8C-46D2-BD78-83C6C6198438} = {8FD72E2D-FB78-45BE-9B31-7FA8C2E09A3B}
 	EndGlobalSection
 EndGlobal
