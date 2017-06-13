@@ -7,7 +7,13 @@
 #include <SDL2/SDL.h>
 #include <GL/glew.h>
 
+#include <simulation.h>
+
+SimulationManager gSimulationManager;
+
 int main(int argc, char** argv)
 {
+	gSimulationManager.Run();
+
 	return 0;
 }
