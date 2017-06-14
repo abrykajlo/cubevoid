@@ -1,0 +1,5 @@
+*.exe
+*.iobj
+*.ipdb
+*.pdb
+SDL2.dll

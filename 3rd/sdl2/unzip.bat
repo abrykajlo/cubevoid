@@ -11,3 +11,8 @@ if not exist "..\..\include\SDL2\" (
 	mkdir ..\..\include\SDL2
 )
 copy .\SDL2-2.0.5\include\*.* ..\..\include\SDL2\
+
+if not exist "..\..\install\" (
+	mkdir ..\..\install\
+)
+copy .\SDL2-2.0.5\lib\x64\SDL2.dll ..\..\install\
