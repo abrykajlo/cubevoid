@@ -13,3 +13,6 @@ private:
 
 	bool quit_;
 };
+
+int BigInit();
+int BigQuit();

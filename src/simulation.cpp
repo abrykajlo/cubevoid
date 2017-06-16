@@ -1,15 +1,16 @@
 #include <SDL2/SDL_events.h>
 #include <SDL2/SDL.h>
 #include <simulation.h>
+#include <render.h>
 
 SimulationManager::SimulationManager()
 {
-	SDL_Init(SDL_INIT_EVERYTHING);
+	//do nothing
 }
 
 SimulationManager::~SimulationManager()
 {
-	SDL_Quit();
+	//do nothing
 }
 
 int SimulationManager::Run()
@@ -37,4 +38,35 @@ int SimulationManager::Run()
 void SimulationManager::Quit()
 {
 	quit_ = true;
+}
+
+int BigInit()
+{
+	auto rm = RenderManager::Get();
+
+	if (rm.Init() < 0)
+	{
+		return -1;
+	}
+
+	if (SDL_Init(SDL_INIT_EVERYTHING) < 0)
+	{
+		return -1;
+	}
+
+	return 0;
+}
+
+int BigQuit()
+{
+	auto rm = RenderManager::Get();
+
+	if (rm.Quit() < 0)
+	{
+		return -1;
+	}
+
+	SDL_Quit();
+
+	return 0;
 }

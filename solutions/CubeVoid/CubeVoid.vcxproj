@@ -129,9 +129,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\main.cpp" />
+    <ClCompile Include="..\..\src\render.cpp" />
     <ClCompile Include="..\..\src\simulation.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\include\render.h" />
     <ClInclude Include="..\..\include\simulation.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
