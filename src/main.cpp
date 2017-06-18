@@ -4,6 +4,8 @@
 * Written by Adam Brykajlo <adam.brykajlo@gmail.com>, June 2017
 */
 
+#define GLEW_STATIC
+
 #include <SDL2/SDL.h>
 #include <GL/glew.h>
 

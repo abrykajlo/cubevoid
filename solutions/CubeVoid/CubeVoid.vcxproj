@@ -92,7 +92,7 @@
       <ExceptionHandling>false</ExceptionHandling>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>..\..\lib\SDL2main.lib;..\..\lib\SDL2.lib;..\..\lib\glew32s.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>..\..\lib\glew32s.lib;opengl32.lib;..\..\lib\SDL2main.lib;..\..\lib\SDL2.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Windows</SubSystem>
     </Link>
   </ItemDefinitionGroup>
@@ -128,15 +128,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\include\shader.cpp" />
+    <ClCompile Include="..\..\src\glew.c" />
     <ClCompile Include="..\..\src\main.cpp" />
     <ClCompile Include="..\..\src\render.cpp" />
     <ClCompile Include="..\..\src\simulation.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\include\math.h" />
+    <ClInclude Include="..\..\include\cubevoidmath.h" />
     <ClInclude Include="..\..\include\render.h" />
     <ClInclude Include="..\..\include\shader.h" />
     <ClInclude Include="..\..\include\simulation.h" />
+    <ClInclude Include="..\..\include\util.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

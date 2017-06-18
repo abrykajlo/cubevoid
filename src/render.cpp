@@ -1,5 +1,8 @@
-#include "render.h"
 #include <SDL2/SDL.h>
+#include <GL/glew.h>
+#include <GL/GL.h>
+
+#include "render.h"
 
 RenderManager::RenderManager()
 {
@@ -26,6 +29,11 @@ int RenderManager::Init()
 		SDL_WINDOW_OPENGL);
 
 	if (window_ == NULL)
+	{
+		return -1;
+	}
+
+	if (glewInit() != GLEW_OK)
 	{
 		return -1;
 	}

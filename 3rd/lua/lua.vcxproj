@@ -116,6 +116,8 @@
       <FileType>Document</FileType>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">call unzip.bat</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\lua</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">call unzip.bat</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\lua-5.3.4\;%(Outputs)</Outputs>
     </CustomBuild>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

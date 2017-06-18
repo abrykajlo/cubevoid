@@ -1,1 +1,4 @@
 lua/
+glew.c
+glewinfo.c
+visualinfo.c

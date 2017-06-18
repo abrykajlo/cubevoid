@@ -3,3 +3,5 @@
 *.ipdb
 *.pdb
 SDL2.dll
+CubeVoid.exp
+CubeVoid.lib
