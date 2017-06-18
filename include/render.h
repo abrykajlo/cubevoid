@@ -16,4 +16,5 @@ private:
 	static RenderManager rm_;
 
 	SDL_Window* window_;
+	SDL_GLContext context_;
 };

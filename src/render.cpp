@@ -21,6 +21,8 @@ int RenderManager::Init()
 		return -1;
 	}
 
+
+	//open window
 	window_ = SDL_CreateWindow("CubeVoid",
 		SDL_WINDOWPOS_CENTERED,
 		SDL_WINDOWPOS_CENTERED,
@@ -33,6 +35,12 @@ int RenderManager::Init()
 		return -1;
 	}
 
+	//create context for window
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 4);
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 4);
+	context_ = SDL_GL_CreateContext(window_);
+	
+	//init glew and check for success
 	if (glewInit() != GLEW_OK)
 	{
 		return -1;
@@ -45,6 +53,7 @@ int RenderManager::Init()
 int RenderManager::Quit()
 {
 	SDL_DestroyWindow(window_);
+	SDL_GL_DeleteContext(context_);
 	return 0;
 }
 
