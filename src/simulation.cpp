@@ -15,6 +15,7 @@ SimulationManager::~SimulationManager()
 
 int SimulationManager::Run()
 {
+	RenderManager& rm = RenderManager::Get();
 	while (!quit_)
 	{
 		SDL_Event event;
@@ -30,6 +31,7 @@ int SimulationManager::Run()
 				Quit();
 			}
 		}
+		rm.Render();
 	}
 
 	return 0;
