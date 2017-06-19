@@ -11,7 +11,6 @@ public:
 	int Init();
 	int Quit();
 
-	static RenderManager& Get();
 	int Render();
 private:
 	static RenderManager rm_;

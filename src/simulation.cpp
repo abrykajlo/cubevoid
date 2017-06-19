@@ -3,6 +3,8 @@
 #include <simulation.h>
 #include <render.h>
 
+RenderManager gRenderManager;
+
 SimulationManager::SimulationManager()
 {
 	//do nothing
@@ -15,7 +17,6 @@ SimulationManager::~SimulationManager()
 
 int SimulationManager::Run()
 {
-	RenderManager& rm = RenderManager::Get();
 	while (!quit_)
 	{
 		SDL_Event event;
@@ -31,7 +32,7 @@ int SimulationManager::Run()
 				Quit();
 			}
 		}
-		rm.Render();
+		gRenderManager.Render();
 	}
 
 	return 0;
@@ -44,9 +45,7 @@ void SimulationManager::Quit()
 
 int BigInit()
 {
-	auto rm = RenderManager::Get();
-
-	if (rm.Init() < 0)
+	if (gRenderManager.Init() < 0)
 	{
 		return -1;
 	}
@@ -61,9 +60,7 @@ int BigInit()
 
 int BigQuit()
 {
-	auto rm = RenderManager::Get();
-
-	if (rm.Quit() < 0)
+	if (gRenderManager.Quit() < 0)
 	{
 		return -1;
 	}
