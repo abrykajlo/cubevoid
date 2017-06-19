@@ -135,11 +135,11 @@
     <ClCompile Include="..\..\src\simulation.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\include\cubevoidmath.h" />
-    <ClInclude Include="..\..\include\render.h" />
-    <ClInclude Include="..\..\include\shader.h" />
-    <ClInclude Include="..\..\include\simulation.h" />
-    <ClInclude Include="..\..\include\util.h" />
+    <ClInclude Include="..\..\include\math.hpp" />
+    <ClInclude Include="..\..\include\render.hpp" />
+    <ClInclude Include="..\..\include\shader.hpp" />
+    <ClInclude Include="..\..\include\simulation.hpp" />
+    <ClInclude Include="..\..\include\util.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

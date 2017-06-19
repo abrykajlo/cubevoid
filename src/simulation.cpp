@@ -1,7 +1,7 @@
 #include <SDL2/SDL_events.h>
 #include <SDL2/SDL.h>
-#include <simulation.h>
-#include <render.h>
+#include <simulation.hpp>
+#include <render.hpp>
 
 RenderManager gRenderManager;
 

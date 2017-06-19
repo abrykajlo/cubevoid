@@ -32,19 +32,19 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\include\simulation.h">
+    <ClInclude Include="..\..\include\math.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\render.h">
+    <ClInclude Include="..\..\include\render.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\shader.h">
+    <ClInclude Include="..\..\include\shader.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\util.h">
+    <ClInclude Include="..\..\include\simulation.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\cubevoidmath.h">
+    <ClInclude Include="..\..\include\util.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

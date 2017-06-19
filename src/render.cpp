@@ -3,7 +3,7 @@
 #include <GL/GL.h>
 #include <cstdio>
 
-#include "render.h"
+#include "render.hpp"
 
 RenderManager::RenderManager() : initialized_(false)
 {
