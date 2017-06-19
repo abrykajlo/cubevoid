@@ -8,3 +8,5 @@ copy .\glew-2.0.0\include\GL\glew.h ..\..\include\GL\
 copy .\glew-2.0.0\include\GL\wglew.h ..\..\include\GL\
 
 copy .\glew-2.0.0\src\glew.c ..\..\src\glew.c
+
+type nul > .\timestamp.txt

@@ -117,7 +117,7 @@
       </Command>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">call unzip.bat</Command>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ProjectDir)SDL2-2.0.5\;%(Outputs)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\timestamp.txt;%(Outputs)</Outputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">call unzip.bat</Command>
     </CustomBuild>
   </ItemGroup>
