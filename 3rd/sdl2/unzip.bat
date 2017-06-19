@@ -16,3 +16,5 @@ if not exist "..\..\install\" (
 	mkdir ..\..\install\
 )
 copy .\SDL2-2.0.5\lib\x64\SDL2.dll ..\..\install\
+
+type nul > timestamp.txt

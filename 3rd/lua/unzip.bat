@@ -11,3 +11,5 @@ if not exist "..\..\src\lua\" (
 	mkdir ..\..\src\lua
 )
 copy .\lua-5.3.4\src\*.c ..\..\src\lua
+
+type nul > .\timestamp.txt
