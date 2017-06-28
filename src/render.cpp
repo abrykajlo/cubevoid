@@ -1,7 +1,6 @@
 #include <SDL2/SDL.h>
 #include <GL/glew.h>
 #include <GL/GL.h>
-#include <cstdio>
 
 #include "render.hpp"
 
@@ -30,7 +29,7 @@ int RenderManager::Init()
 		480,
 		SDL_WINDOW_OPENGL);
 
-	if (window_ == NULL)
+	if (window_ == nullptr)
 	{
 		return -1;
 	}
@@ -44,7 +43,7 @@ int RenderManager::Init()
 	//create context for window
 	context_ = SDL_GL_CreateContext(window_);
 
-	if (context_ == NULL)
+	if (context_ == nullptr)
 	{
 		return -1;
 	}

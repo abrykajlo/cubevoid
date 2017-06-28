@@ -53,14 +53,6 @@ int ShaderProgram::AddShader(Shader& shader)
 	}
 	else
 	{
-		switch (tail_->data->shaderType_)
-		{
-		case VERTEX_SHADER:
-		case TESS_CONTROL_SHADER:
-		case TESS_EVALUATION_SHADER:
-		case GEOMETRY_SHADER:
-		case FRAGMENT_SHADER:
-		}
 		auto temp = new ShaderNode(&shader);
 		tail_->next = temp;
 		tail_ = temp;
