@@ -1,7 +1,8 @@
 #pragma once
 
+#include <string>
+
 #include <GL/glew.h>
-#include <util.hpp>
 
 enum ShaderType
 {
@@ -21,28 +22,11 @@ public:
 	Shader(ShaderType st);
 	~Shader();
 
-	int SetSource(const char*);
+	int SetSource(std::string);
 	int Compile();
 	const char* GetError();
 private:
 	ShaderType shaderType_;
-	const char* source_;
+	std::string source_;
 	GLuint shaderId_;
-};
-
-using ShaderNode = Node<Shader*>;
-
-class ShaderProgram
-{
-	ShaderProgram();
-	~ShaderProgram();
-
-	int AddShader(Shader& shader);
-	int Compile();
-	const char* GetError();
-private:
-	ShaderNode* head_;
-	ShaderNode* tail_;
-
-	GLuint programId_;
 };
