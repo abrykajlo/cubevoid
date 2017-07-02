@@ -29,7 +29,10 @@ int SimulationManager::Run()
 
 			if (event.type == SDL_KEYDOWN) 
 			{
-				Quit();
+				if (event.key.keysym.sym == SDLK_q)
+				{
+					Quit();
+				}
 			}
 		}
 		gRenderManager.Render();

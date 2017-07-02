@@ -29,4 +29,5 @@ private:
 	ShaderType shaderType_;
 	std::string source_;
 	GLuint shaderId_;
+	char* error_;
 };

@@ -80,6 +80,7 @@
       <WarningLevel>TurnOffAllWarnings</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <ExceptionHandling>false</ExceptionHandling>
     </ClCompile>
     <Link>
       <TreatLinkerWarningAsErrors>false</TreatLinkerWarningAsErrors>
@@ -95,6 +96,7 @@
       <ExceptionHandling>false</ExceptionHandling>
       <AdditionalOptions>-D_HAS_EXCEPTIONS=0 -D_STATIC_CPPLIB %(AdditionalOptions)</AdditionalOptions>
       <TreatWarningAsError>false</TreatWarningAsError>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <AdditionalDependencies>opengl32.lib;..\..\lib\SDL2main.lib;..\..\lib\SDL2.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -109,6 +111,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
+      <ExceptionHandling>false</ExceptionHandling>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -126,6 +129,7 @@
       <AdditionalIncludeDirectories>..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
       <ExceptionHandling>false</ExceptionHandling>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -136,6 +140,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\include\log.cpp" />
     <ClCompile Include="..\..\src\glew.c" />
     <ClCompile Include="..\..\src\main.cpp" />
     <ClCompile Include="..\..\src\render.cpp" />
@@ -144,6 +149,7 @@
     <ClCompile Include="..\..\src\simulation.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\include\log.hpp" />
     <ClInclude Include="..\..\include\render.hpp" />
     <ClInclude Include="..\..\include\shader.hpp" />
     <ClInclude Include="..\..\include\shader_program.hpp" />

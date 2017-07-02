@@ -3,8 +3,7 @@
 #include "shader.hpp"
 
 Shader::Shader(ShaderType st) 
-	: source_(nullptr),
-	  shaderType_(st)
+	: shaderType_(st)
 {
 	shaderId_ = glCreateShader(st);
 }
@@ -22,11 +21,32 @@ int Shader::SetSource(std::string source)
 
 int Shader::Compile()
 {
+	GLint compileSuccess = 0;
 	glCompileShader(shaderId_);
+
+	//check compile status
+	glGetShaderiv(shaderId_, GL_COMPILE_STATUS, &compileSuccess);
+	if (!compileSuccess)
+	{
+		return -1;
+	}
+
 	return 0;
 }
 
 const char* Shader::GetError()
 {
-	return nullptr;
+	GLint length = -1;
+	glGetShaderiv(shaderId_, GL_INFO_LOG_LENGTH, &length);
+	if (length > 0)
+	{
+		//TODO: store length_ and check if resize is necessary
+		error_ = new char[length];
+		glGetShaderInfoLog(shaderId_, sizeof(char), &length, error_);
+		return error_;
+	}
+	else
+	{
+		return nullptr;
+	}
 }

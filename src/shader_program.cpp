@@ -48,6 +48,11 @@ int ShaderProgram::Compile()
 	return 0;
 }
 
+void ShaderProgram::Use()
+{
+	glUseProgram(programId_);
+}
+
 const char* ShaderProgram::GetError()
 {
 	return nullptr;

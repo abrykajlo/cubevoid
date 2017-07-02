@@ -4,7 +4,9 @@
 
 #include "render.hpp"
 
-RenderManager::RenderManager() : initialized_(false)
+RenderManager::RenderManager() 
+	: initialized_(false),
+	  log_(nullptr)
 {
 	//do nothing
 }
@@ -16,6 +18,8 @@ RenderManager::~RenderManager()
 
 int RenderManager::Init()
 {
+	log_ = new Log("RenderManager.log");
+
 	if (SDL_InitSubSystem(SDL_INIT_VIDEO) < 0)
 	{
 		return -1;
@@ -34,7 +38,7 @@ int RenderManager::Init()
 		return -1;
 	}
 
-
+	//setup OpenGL version and context profile
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 4);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 4);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
@@ -58,8 +62,15 @@ int RenderManager::Init()
 	SDL_GL_SetSwapInterval(1);
 
 	SDL_ShowWindow(window_);
-	glClearColor(0, 0, 1, 1);
+	glClearColor(1, 0, 0, 1);
 	initialized_ = true;
+
+	Shader s(ShaderType::COMPUTE_SHADER);
+	if (s.Compile() < 0)
+	{
+		log_->Write(s.GetError());
+		return -1;
+	}
 	return 0;
 }
 
