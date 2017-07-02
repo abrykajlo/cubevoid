@@ -24,9 +24,6 @@
     <ClCompile Include="..\..\src\render.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\glew.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\shader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
