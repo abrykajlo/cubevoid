@@ -66,6 +66,7 @@ int RenderManager::Init()
 	initialized_ = true;
 
 	Shader s(ShaderType::COMPUTE_SHADER);
+	s.SetSource("This is bad source code");
 	if (s.Compile() < 0)
 	{
 		log_->Write(s.GetError());

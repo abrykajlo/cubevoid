@@ -16,6 +16,8 @@ Shader::~Shader()
 int Shader::SetSource(std::string source)
 {
 	source_ = std::move(source);
+	const char* csrc = source_.c_str();
+	glShaderSource(shaderId_, 1, &csrc, nullptr);
 	return 0;
 }
 
@@ -42,7 +44,7 @@ const char* Shader::GetError()
 	{
 		//TODO: store length_ and check if resize is necessary
 		error_ = new char[length];
-		glGetShaderInfoLog(shaderId_, sizeof(char), &length, error_);
+		glGetShaderInfoLog(shaderId_, length, nullptr, error_);
 		return error_;
 	}
 	else
