@@ -1,9 +1,9 @@
 #pragma once
 
 #include <memory>
+#include <core/util.hpp>
 
-#include <shader.hpp>
-#include <util.hpp>
+#include "shader.hpp"
 
 using ShaderNode = Node<std::shared_ptr<Shader>>;
 

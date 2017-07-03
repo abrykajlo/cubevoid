@@ -1,9 +1,8 @@
 #include <SDL2/SDL_events.h>
 #include <SDL2/SDL.h>
-#include <simulation.hpp>
-#include <render.hpp>
+#include <render_manager/render.hpp>
 
-RenderManager gRenderManager;
+#include "simulation.hpp"
 
 SimulationManager::SimulationManager()
 {

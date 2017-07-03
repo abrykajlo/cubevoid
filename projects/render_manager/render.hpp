@@ -1,9 +1,10 @@
 #pragma once
 
 #include <SDL2/SDL_video.h>
+#include <core/log.hpp>
 
-#include <log.hpp>
-#include <shader_program.hpp>
+#include "shader_program.hpp"
+
 
 class RenderManager
 {
@@ -22,3 +23,5 @@ private:
 	Log* log_;
 	ShaderProgram* shaderProgram_;
 };
+
+extern RenderManager gRenderManager;

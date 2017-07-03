@@ -1,4 +1,4 @@
-#include <shader_program.hpp>
+#include "shader_program.hpp"
 
 ShaderProgram::ShaderProgram()
 	: head_(nullptr),
