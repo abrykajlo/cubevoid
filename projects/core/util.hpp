@@ -1,29 +1,36 @@
+/* Copyright (C) 2017, Adam Brykajlo, Inc - All Rights Reserved
+** Unauthorized copying of this file, via any medium is strictly prohibited
+** Proprietary and confidential
+** Written by Adam Brykajlo <adam.brykajlo@gmail.com>, June 2017
+*/
+
+
 #pragma once
 
-template <class D>
+template <class DataT>
 struct Node
 {
-	D data;
+	DataT data;
 	Node* next;
 
 	Node();
-	Node(D data);
-	Node(D data, Node* next);
+	Node(DataT data);
+	Node(DataT data, Node* next);
 };
 
-template<class D>
-inline Node<D>::Node() : next(nullptr)
+template<class DataT>
+inline Node<DataT>::Node() : next(nullptr)
 {}
 
-template<class D>
-inline Node<D>::Node(D data)
+template<class DataT>
+inline Node<DataT>::Node(DataT data)
 	: data(data),
 	  next(nullptr)
 {
 }
 
-template<class D>
-inline Node<D>::Node(D data, Node * next)
+template<class DataT>
+inline Node<DataT>::Node(DataT data, Node * next)
 	: data(data),
 	  next(next)
 {

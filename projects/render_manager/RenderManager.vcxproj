@@ -86,7 +86,7 @@
     </ClCompile>
     <Lib>
       <OutputFile>.\lib\$(TargetName)$(TargetExt)</OutputFile>
-      <AdditionalLibraryDirectories>..\3rd\glew\lib\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -100,7 +100,7 @@
     </ClCompile>
     <Lib>
       <OutputFile>.\lib\$(TargetName)$(TargetExt)</OutputFile>
-      <AdditionalLibraryDirectories>..\3rd\glew\lib\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -120,7 +120,7 @@
     </Link>
     <Lib>
       <OutputFile>.\lib\$(TargetName)$(TargetExt)</OutputFile>
-      <AdditionalLibraryDirectories>..\3rd\glew\lib\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -140,7 +140,7 @@
     </Link>
     <Lib>
       <OutputFile>.\lib\$(TargetName)$(TargetExt)</OutputFile>
-      <AdditionalLibraryDirectories>..\3rd\glew\lib\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
