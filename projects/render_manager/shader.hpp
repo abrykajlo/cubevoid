@@ -1,17 +1,22 @@
-#pragma once
+/* Copyright (C) 2017, Adam Brykajlo, Inc - All Rights Reserved
+** Unauthorized copying of this file, via any medium is strictly prohibited
+** Proprietary and confidential
+** Written by Adam Brykajlo <adam.brykajlo@gmail.com>, June 2017
+*/
 
-#include <string>
+
+#pragma once
 
 #include <GL/glew.h>
 
 enum ShaderType
 {
-	VERTEX_SHADER = GL_VERTEX_SHADER,
-	TESS_CONTROL_SHADER = GL_TESS_CONTROL_SHADER,
-	TESS_EVALUATION_SHADER = GL_TESS_EVALUATION_SHADER,
-	GEOMETRY_SHADER = GL_GEOMETRY_SHADER,
-	FRAGMENT_SHADER = GL_FRAGMENT_SHADER,
-	COMPUTE_SHADER = GL_COMPUTE_SHADER
+	VERTEX_SHADER = 0,
+	TESS_CONTROL_SHADER = 1,
+	TESS_EVALUATION_SHADER = 2,
+	GEOMETRY_SHADER = 3,
+	FRAGMENT_SHADER = 4,
+	COMPUTE_SHADER = 5
 };
 
 class Shader
@@ -22,12 +27,12 @@ public:
 	Shader(ShaderType st);
 	~Shader();
 
-	int SetSource(std::string);
+	void SetSource(const char* source);
 	int Compile();
 	const char* GetError();
 private:
 	ShaderType shaderType_;
-	std::string source_;
 	GLuint shaderId_;
 	char* error_;
+	size_t errorLength_;
 };

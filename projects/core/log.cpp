@@ -9,18 +9,17 @@
 
 #include "log.hpp"
 
-Log::Log(const char * filename)
+Log::Log(const char * fileName)
 {
-	fopen_s(&file_, filename, "w");
+	file_.Open(fileName);
 }
 
 Log::~Log()
 {
-	fflush(file_);
-	fclose(file_);
+	file_.Flush();
 }
 
 int Log::Write(const char* line)
 {
-	return fprintf(file_, line);
+	return file_.Write(line);
 }

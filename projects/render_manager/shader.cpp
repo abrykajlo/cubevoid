@@ -10,32 +10,60 @@
 #include "shader.hpp"
 
 Shader::Shader(ShaderType st) 
-	: shaderType_(st)
+	: shaderType_(st),
+	  error_(nullptr)
 {
-	shaderId_ = glCreateShader(st);
+	GLenum glShaderType;
+	switch (st)
+	{
+	case VERTEX_SHADER:
+		glShaderType = GL_VERTEX_SHADER;
+		break;
+	case TESS_CONTROL_SHADER:
+		glShaderType = GL_TESS_CONTROL_SHADER;
+		break;
+	case TESS_EVALUATION_SHADER:
+		glShaderType = GL_TESS_EVALUATION_SHADER;
+		break;
+	case GEOMETRY_SHADER:
+		glShaderType = GL_GEOMETRY_SHADER;
+		break;
+	case FRAGMENT_SHADER:
+		glShaderType = GL_FRAGMENT_SHADER;
+		break;
+	case COMPUTE_SHADER:
+		glShaderType = GL_COMPUTE_SHADER;
+		break;
+	}
+	shaderId_ = glCreateShader(glShaderType);
 }
 
 Shader::~Shader()
 {
-	//TODO: delete resource from OpenGL
+	if (error_ != nullptr)
+	{
+		delete[] error_;
+	}
+
+	if (glIsShader(shaderId_))
+	{
+		glDeleteShader(shaderId_);
+	}
 }
 
-int Shader::SetSource(std::string source)
+void Shader::SetSource(const char* source)
 {
-	source_ = std::move(source);
-	const char* csrc = source_.c_str();
-	glShaderSource(shaderId_, 1, &csrc, nullptr);
-	return 0;
+	glShaderSource(shaderId_, 1, &source, nullptr);
 }
 
 int Shader::Compile()
 {
-	GLint compileSuccess = 0;
+	GLint compileStatus = 0;
 	glCompileShader(shaderId_);
 
 	//check compile status
-	glGetShaderiv(shaderId_, GL_COMPILE_STATUS, &compileSuccess);
-	if (!compileSuccess)
+	glGetShaderiv(shaderId_, GL_COMPILE_STATUS, &compileStatus);
+	if (!compileStatus)
 	{
 		return -1;
 	}
@@ -45,12 +73,17 @@ int Shader::Compile()
 
 const char* Shader::GetError()
 {
-	GLint length = -1;
+	GLint length = 0;
 	glGetShaderiv(shaderId_, GL_INFO_LOG_LENGTH, &length);
 	if (length > 0)
 	{
-		//TODO: store length_ and check if resize is necessary
-		error_ = new char[length];
+		if (errorLength_ < length)
+		{
+			delete[] error_;
+			errorLength_ = length;
+			error_ = new char[errorLength_];
+		}
+
 		glGetShaderInfoLog(shaderId_, length, nullptr, error_);
 		return error_;
 	}

@@ -5,6 +5,8 @@
 */
 
 
+#include <cstring>
+
 #include <SDL2/SDL.h>
 #include <GL/glew.h>
 #include <GL/GL.h>
@@ -62,7 +64,6 @@ int RenderManager::Init()
 	}
 
 	//init glew and check for success
-	glewExperimental = true;
 	if (glewInit() != GLEW_OK)
 	{
 		return -1;
@@ -74,11 +75,8 @@ int RenderManager::Init()
 	glClearColor(1, 0, 0, 1);
 	initialized_ = true;
 
-	Shader s(ShaderType::COMPUTE_SHADER);
-	s.SetSource("This is bad source code");
-	if (s.Compile() < 0)
+	if (InitShaders() < 0)
 	{
-		log_->Write(s.GetError());
 		return -1;
 	}
 	return 0;
@@ -88,12 +86,76 @@ int RenderManager::Quit()
 {
 	SDL_DestroyWindow(window_);
 	SDL_GL_DeleteContext(context_);
+	delete shaderProgram_;
 	return 0;
 }
 
 int RenderManager::Render()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glBindVertexArray(vao_);
+	glDrawArrays(GL_TRIANGLES, 0, 3);
 	SDL_GL_SwapWindow(window_);
+	return 0;
+}
+
+int RenderManager::InitShaders()
+{
+	DefaultReadFile vertShaderFile("./assets/shaders/shader.vert");
+	DefaultReadFile fragShaderFile("./assets/shaders/shader.frag");
+	
+	Shader vertShader(VERTEX_SHADER);
+	Shader fragShader(FRAGMENT_SHADER);
+	
+	//prepare shader sources
+	char buf[1024];
+	memset(buf, 0, 1024);
+	vertShaderFile.Read(buf, 1024);
+	vertShader.SetSource(buf);
+	if (vertShader.Compile() < 0)
+	{
+		log_->Write(vertShader.GetError());
+		return -1;
+	}
+
+	memset(buf, 0, 1024);
+	fragShaderFile.Read(buf, 1024);
+	fragShader.SetSource(buf);
+	if (fragShader.Compile() < 0)
+	{
+		log_->Write(fragShader.GetError());
+		return -1;
+	}
+
+	//set up shaderprogram
+	shaderProgram_ = new ShaderProgram();
+	shaderProgram_->AttachShader(&vertShader);
+	shaderProgram_->AttachShader(&fragShader);
+	if (shaderProgram_->Link() < 0)
+	{
+		log_->Write(shaderProgram_->GetError());
+		return -1;
+	}
+	
+	vertShaderFile.Close();
+	fragShaderFile.Close();
+	
+	shaderProgram_->Use();
+
+
+	GLfloat triangle[3][2] = {
+		{0, 0.8},
+		{0.8, -0.8},
+		{-0.8, -0.8}
+	};
+
+	glGenVertexArrays(1, &vao_);
+	glGenBuffers(1, &vbo_);
+	glBindBuffer(GL_ARRAY_BUFFER, vbo_);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(triangle), triangle, GL_STATIC_DRAW);
+
+	glBindVertexArray(vao_);
+	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, 0);
+	glEnableVertexAttribArray(0);
 	return 0;
 }

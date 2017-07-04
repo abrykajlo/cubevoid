@@ -9,13 +9,15 @@
 
 #include <cstdio>
 
+#include "file.hpp"
+
 class Log
 {
 public:
-	Log(const char* filename);
+	Log(const char* fileName);
 	~Log();
 
 	int Write(const char* line);
 private:
-	FILE* file_;
+	DefaultWriteFile file_;
 };

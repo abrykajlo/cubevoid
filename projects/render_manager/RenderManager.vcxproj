@@ -149,7 +149,6 @@
     <ClInclude Include="shader_program.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\core\log.cpp" />
     <ClCompile Include="render.cpp" />
     <ClCompile Include="shader.cpp" />
     <ClCompile Include="shader_program.cpp" />

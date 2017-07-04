@@ -8,49 +8,53 @@
 #include "shader_program.hpp"
 
 ShaderProgram::ShaderProgram()
-	: head_(nullptr),
-	tail_(nullptr)
-{}
+	: shaders_{nullptr},
+	  error_(nullptr),
+	  errorLength_(0)
+{
+	programId_ = glCreateProgram();
+}
 
 ShaderProgram::~ShaderProgram()
 {
-	//TODO: need to free up ShaderNodes
-}
-
-int ShaderProgram::AddShader(std::shared_ptr<Shader> shader)
-{
-	if (head_ == nullptr)
+	if (error_)
 	{
-		head_ = new ShaderNode(shader);
-		tail_ = head_;
-	}
-	else
-	{
-		auto temp = new ShaderNode(shader);
-		tail_->next = temp;
-		tail_ = temp;
+		delete[] error_;
 	}
 
-	return 0;
+	if (glIsProgram(programId_))
+	{
+		glDeleteProgram(programId_);
+	}
 }
 
-int ShaderProgram::Compile()
+int ShaderProgram::AttachShader(Shader* shader)
 {
-	if (head_ == nullptr)
+	if (!shader)
 	{
 		return -1;
 	}
-	else
+	
+	if (shaders_[shader->shaderType_])
 	{
-		auto ptr = head_;
-		while (ptr->data->Compile() == 0)
-		{
-			glAttachShader(programId_, ptr->data->shaderId_);
-			ptr = ptr->next;
-			if (ptr == nullptr) break;
-		}
+		glDetachShader(programId_, shaders_[shader->shaderType_]->shaderId_);
+	}
+	
+	glAttachShader(programId_, shader->shaderId_);
+	shaders_[shader->shaderType_] = shader;
+	return 0;
+}
 
-		glLinkProgram(programId_);
+int ShaderProgram::Link()
+{
+	GLint linkStatus = 0;
+	glLinkProgram(programId_);
+
+	//check link status
+	glGetProgramiv(programId_, GL_LINK_STATUS, &linkStatus);
+	if (!linkStatus)
+	{
+		return -1;
 	}
 	return 0;
 }
@@ -62,5 +66,22 @@ void ShaderProgram::Use()
 
 const char* ShaderProgram::GetError()
 {
-	return nullptr;
+	GLint length = 0;
+	glGetProgramiv(programId_, GL_INFO_LOG_LENGTH, &length);
+	if (length > 0)
+	{
+		if (errorLength_ < length)
+		{
+			delete[] error_;
+			errorLength_ = length;
+			error_ = new char[errorLength_];
+		}
+
+		glGetProgramInfoLog(programId_, length, nullptr, error_);
+		return error_;
+	}
+	else
+	{
+		return nullptr;
+	}
 }
