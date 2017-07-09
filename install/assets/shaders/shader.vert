@@ -1,10 +1,9 @@
 #version 440 core
 
-layout (location = 0) in vec2 vPosition;
+layout (location = 0) in vec3 vPosition;
 
 void main()
 {
-    gl_Position.xy = vPosition;
-    gl_Position.z = 0.0;
+    gl_Position.xyz = vPosition;
     gl_Position.w = 1.0;
 }

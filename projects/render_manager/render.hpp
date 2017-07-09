@@ -9,6 +9,7 @@
 
 #include <SDL2/SDL_video.h>
 #include <core/log.hpp>
+#include <core/mesh.hpp>
 
 #include "shader_program.hpp"
 
@@ -29,8 +30,7 @@ private:
 	bool initialized_;
 	Log* log_;
 	ShaderProgram* shaderProgram_;
-	GLuint vao_;
-	GLuint vbo_;
+	Mesh mesh_;
 
 	int InitShaders();
 };

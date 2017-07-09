@@ -54,7 +54,7 @@ int RenderManager::Init()
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 4);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
-	
+
 	//create context for window
 	context_ = SDL_GL_CreateContext(window_);
 
@@ -79,6 +79,15 @@ int RenderManager::Init()
 	{
 		return -1;
 	}
+
+	mesh_.add_v({ 0.5, 0.5, 0 });
+	mesh_.add_v({ 0.5, -0.5, 0 });
+	mesh_.add_v({ -0.5, -0.5, 0 });
+	mesh_.add_v({ -0.5, 0.5, 0 });
+	mesh_.add_f({ 0, 1, 2 });
+	mesh_.add_f({ 2, 3, 0 });
+
+	mesh_.Init();
 	return 0;
 }
 
@@ -87,14 +96,14 @@ int RenderManager::Quit()
 	SDL_DestroyWindow(window_);
 	SDL_GL_DeleteContext(context_);
 	delete shaderProgram_;
+	mesh_.Quit();
 	return 0;
 }
 
 int RenderManager::Render()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glBindVertexArray(vao_);
-	glDrawArrays(GL_TRIANGLES, 0, 3);
+	mesh_.Draw();
 	SDL_GL_SwapWindow(window_);
 	return 0;
 }
@@ -141,21 +150,5 @@ int RenderManager::InitShaders()
 	fragShaderFile.Close();
 	
 	shaderProgram_->Use();
-
-
-	GLfloat triangle[3][2] = {
-		{0, 0.8},
-		{0.8, -0.8},
-		{-0.8, -0.8}
-	};
-
-	glGenVertexArrays(1, &vao_);
-	glGenBuffers(1, &vbo_);
-	glBindBuffer(GL_ARRAY_BUFFER, vbo_);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(triangle), triangle, GL_STATIC_DRAW);
-
-	glBindVertexArray(vao_);
-	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, 0);
-	glEnableVertexAttribArray(0);
 	return 0;
 }
