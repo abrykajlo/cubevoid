@@ -5,7 +5,6 @@
 #include <GL/glew.h>
 
 #include "vec.hpp"
-#include "parser\parsers.hpp"
 
 using face = vec3<int>;
 
@@ -30,3 +29,5 @@ private:
 	GLuint vbo_;
 	GLuint vio_;
 };
+
+bool Parse(char* from, char* to, Mesh& mesh);

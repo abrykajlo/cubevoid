@@ -13,15 +13,18 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Header Files\parsers">
-      <UniqueIdentifier>{653dc7ca-6829-4ccf-9209-5b633644e465}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="log.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="mesh.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="camera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="mat.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -37,9 +40,6 @@
     </ClInclude>
     <ClInclude Include="util.hpp">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="parser\parsers.hpp">
-      <Filter>Header Files\parsers</Filter>
     </ClInclude>
     <ClInclude Include="mesh.hpp">
       <Filter>Header Files</Filter>

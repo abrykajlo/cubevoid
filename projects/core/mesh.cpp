@@ -23,6 +23,7 @@ int Mesh::Init()
 	glGenBuffers(1, &vio_);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vio_);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(face) * f_.size(), &f_[0], GL_STATIC_DRAW);
+
 	return 0;
 }
 
@@ -50,4 +51,27 @@ void Mesh::add_v(vec3<float> v)
 void Mesh::add_f(face f)
 {
 	f_.push_back(f);
+}
+
+bool Parse(char * from, char * to, Mesh & mesh)
+{
+	vec3<float> v;
+	face f;
+	while (from != to)
+	{
+		switch (*from)
+		{
+		case 'v':
+			sscanf_s(from, "v %f %f %f", &v.x, &v.y, &v.z);
+			mesh.add_v(v);
+			break;
+		case 'f':
+			sscanf_s(from, "f %d %d %d", &f.x, &f.y, &f.z);
+			f.x -= 1; f.y -= 1; f.z -= 1;
+			mesh.add_f(f);
+		}
+		from++;
+	}
+
+	return true;
 }

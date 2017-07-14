@@ -10,6 +10,7 @@
 #include <SDL2/SDL_video.h>
 #include <core/log.hpp>
 #include <core/mesh.hpp>
+#include <core/camera.hpp>
 
 #include "shader_program.hpp"
 
@@ -30,7 +31,8 @@ private:
 	bool initialized_;
 	Log* log_;
 	ShaderProgram* shaderProgram_;
-	Mesh mesh_;
+	Mesh mesh_; //bring mesh out into simulation
+	Camera mainCamera_;
 
 	int InitShaders();
 };

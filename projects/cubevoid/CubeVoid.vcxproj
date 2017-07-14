@@ -88,7 +88,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ExceptionHandling>false</ExceptionHandling>
-      <AdditionalIncludeDirectories>..\;..\3rd\glew;..\3rd\sdl2;..\3rd\boost\boost_1_64_0\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\;..\3rd\glew;..\3rd\sdl2;..\3rd\boost\boost\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <AdditionalOptions>-D_HAS_EXCEPTIONS=0 -D_STATIC_CPPLIB %(AdditionalOptions)</AdditionalOptions>
       <PreprocessorDefinitions>_MBCS;GLEW_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -103,7 +103,7 @@
       <WarningLevel>TurnOffAllWarnings</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\;..\3rd\glew;..\3rd\sdl2;..\3rd\boost\boost_1_64_0\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\;..\3rd\glew;..\3rd\sdl2;..\3rd\boost\boost\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
       <ExceptionHandling>false</ExceptionHandling>
       <AdditionalOptions>-D_HAS_EXCEPTIONS=0 -D_STATIC_CPPLIB %(AdditionalOptions)</AdditionalOptions>
@@ -125,7 +125,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ExceptionHandling>false</ExceptionHandling>
-      <AdditionalIncludeDirectories>..\;..\3rd\glew;..\3rd\sdl2;..\3rd\boost\boost_1_64_0\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\;..\3rd\glew;..\3rd\sdl2;..\3rd\boost\boost\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <AdditionalOptions>-D_HAS_EXCEPTIONS=0 -D_STATIC_CPPLIB %(AdditionalOptions)</AdditionalOptions>
       <PreprocessorDefinitions>_MBCS;GLEW_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -144,7 +144,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\;..\3rd\glew;..\3rd\sdl2;..\3rd\boost\boost_1_64_0\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\;..\3rd\glew;..\3rd\sdl2;..\3rd\boost\boost\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
       <ExceptionHandling>false</ExceptionHandling>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>

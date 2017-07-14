@@ -31,6 +31,11 @@ public:
 		return file_.Open(fileName);
 	}
 
+	size_t Size()
+	{
+		return file_.Size();
+	}
+
 	int Read(char* buf, size_t n)
 	{
 		return file_.Read(buf, n);
@@ -58,13 +63,21 @@ struct DefaultReadPolicy
 {
 	int Open(const char* fileName)
 	{
-		auto ret = fopen_s(&file, fileName, "r");
+		auto ret = fopen_s(&file, fileName, "rb");
 		if (ret != 0)
 		{
 			return -1;
 		}
 
 		return 0;
+	}
+
+	size_t Size()
+	{
+		fseek(file, 0, SEEK_END);
+		auto ret = ftell(file);
+		fseek(file, 0, SEEK_SET);
+		return ret;
 	}
 
 	int Read(char* buf, size_t n)
@@ -84,7 +97,7 @@ struct DefaultWritePolicy
 {
 	int Open(const char* fileName)
 	{
-		auto ret = fopen_s(&file, fileName, "w");
+		auto ret = fopen_s(&file, fileName, "wb");
 		if (ret != 0)
 		{
 			return -1;

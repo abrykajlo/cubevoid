@@ -6,10 +6,14 @@
 
 
 #include <cstring>
+#include <cmath>
 
 #include <SDL2/SDL.h>
 #include <GL/glew.h>
 #include <GL/GL.h>
+
+#include <core/file.hpp>
+#include <core/mat.hpp>
 
 #include "render.hpp"
 
@@ -72,21 +76,30 @@ int RenderManager::Init()
 	SDL_GL_SetSwapInterval(1);
 
 	SDL_ShowWindow(window_);
-	glClearColor(1, 0, 0, 1);
+	glClearColor(0, 0, 0, 1);
 	initialized_ = true;
 
 	if (InitShaders() < 0)
 	{
 		return -1;
 	}
+	//not sure if this is the right place for this
+	glEnable(GL_DEPTH_TEST);
+	glDepthFunc(GL_LESS);
 
-	mesh_.add_v({ 0.5, 0.5, 0 });
-	mesh_.add_v({ 0.5, -0.5, 0 });
-	mesh_.add_v({ -0.5, -0.5, 0 });
-	mesh_.add_v({ -0.5, 0.5, 0 });
-	mesh_.add_f({ 0, 1, 2 });
-	mesh_.add_f({ 2, 3, 0 });
+	DefaultReadFile meshFile;
+	meshFile.Open("./assets/models/dragon.obj");
+	
+	auto size = meshFile.Size();
+	char* fileContents = new char[size];
+	meshFile.Read(fileContents, size);
 
+	if (!Parse(fileContents, fileContents + size - 1, mesh_))
+	{
+		log_->Write("unable to parse file");
+		return -1;
+	}
+	delete[] fileContents;
 	mesh_.Init();
 	return 0;
 }
@@ -102,7 +115,22 @@ int RenderManager::Quit()
 
 int RenderManager::Render()
 {
+	//clear buffers
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	auto rad = 0.01;
+	mat3<float> roty = {
+		cosf(rad), 0, -sinf(rad),
+		0, 1, 0,
+		sinf(rad), 0, cosf(rad)
+	};
+
+	auto& eye = mainCamera_.eye;
+	eye = roty * eye;
+	
+	//set camera projection
+	glUniformMatrix4fv(0, 1, GL_TRUE, (GLfloat*)&mainCamera_.ViewProjection());
+
 	mesh_.Draw();
 	SDL_GL_SwapWindow(window_);
 	return 0;
