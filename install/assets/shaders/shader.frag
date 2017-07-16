@@ -1,8 +1,12 @@
 #version 440 core
-
-layout (location = 0) out vec4 fColor;
+//inputs
+in vec3 fNormal;
+//outputs
+out vec4 fColor;
+//uniforms
+layout (location = 1) uniform vec3 eye; 
 
 void main()
 {
-    fColor = vec4(1.0, 1.0, 1.0, 1.0);
+    fColor = vec4(gl_FragCoord.zzz, 1.0);
 }

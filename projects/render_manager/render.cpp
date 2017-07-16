@@ -6,10 +6,14 @@
 
 
 #include <cstring>
+#include <cmath>
 
 #include <SDL2/SDL.h>
 #include <GL/glew.h>
 #include <GL/GL.h>
+
+#include <core/file.hpp>
+#include <core/mat.hpp>
 
 #include "render.hpp"
 
@@ -54,7 +58,7 @@ int RenderManager::Init()
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 4);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
-	
+
 	//create context for window
 	context_ = SDL_GL_CreateContext(window_);
 
@@ -72,13 +76,31 @@ int RenderManager::Init()
 	SDL_GL_SetSwapInterval(1);
 
 	SDL_ShowWindow(window_);
-	glClearColor(1, 0, 0, 1);
+	glClearColor(0, 0, 0, 1);
 	initialized_ = true;
 
 	if (InitShaders() < 0)
 	{
 		return -1;
 	}
+	//not sure if this is the right place for this
+	glEnable(GL_DEPTH_TEST);
+	glDepthFunc(GL_LESS);
+
+	DefaultReadFile meshFile;
+	meshFile.Open("./assets/models/dragon.obj");
+	
+	auto size = meshFile.Size();
+	char* fileContents = new char[size];
+	meshFile.Read(fileContents, size);
+
+	if (!Parse(fileContents, fileContents + size - 1, mesh_))
+	{
+		log_->Write("unable to parse file");
+		return -1;
+	}
+	delete[] fileContents;
+	mesh_.Init();
 	return 0;
 }
 
@@ -87,14 +109,31 @@ int RenderManager::Quit()
 	SDL_DestroyWindow(window_);
 	SDL_GL_DeleteContext(context_);
 	delete shaderProgram_;
+	mesh_.Quit();
 	return 0;
 }
 
 int RenderManager::Render()
 {
+	//clear buffers
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glBindVertexArray(vao_);
-	glDrawArrays(GL_TRIANGLES, 0, 3);
+
+	auto rad = 0.01;
+	mat3<float> roty = {
+		cosf(rad), 0, -sinf(rad),
+		0, 1, 0,
+		sinf(rad), 0, cosf(rad)
+	};
+
+	auto& eye = mainCamera_.eye;
+	eye = roty * eye;
+	
+	//set eye
+	glUniform3fv(1, 1, (GLfloat*)&eye);
+	//set camera projection
+	glUniformMatrix4fv(0, 1, GL_TRUE, (GLfloat*)&mainCamera_.ViewProjection());
+
+	mesh_.Draw();
 	SDL_GL_SwapWindow(window_);
 	return 0;
 }
@@ -141,21 +180,5 @@ int RenderManager::InitShaders()
 	fragShaderFile.Close();
 	
 	shaderProgram_->Use();
-
-
-	GLfloat triangle[3][2] = {
-		{0, 0.8},
-		{0.8, -0.8},
-		{-0.8, -0.8}
-	};
-
-	glGenVertexArrays(1, &vao_);
-	glGenBuffers(1, &vbo_);
-	glBindBuffer(GL_ARRAY_BUFFER, vbo_);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(triangle), triangle, GL_STATIC_DRAW);
-
-	glBindVertexArray(vao_);
-	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, 0);
-	glEnableVertexAttribArray(0);
 	return 0;
 }
