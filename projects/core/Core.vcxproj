@@ -164,6 +164,7 @@
     <ClInclude Include="mesh.hpp" />
     <ClInclude Include="util.hpp" />
     <ClInclude Include="vec.hpp" />
+    <ClInclude Include="vertex.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

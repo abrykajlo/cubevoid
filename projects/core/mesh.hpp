@@ -4,7 +4,7 @@
 
 #include <GL/glew.h>
 
-#include "vec.hpp"
+#include "vertex.hpp"
 
 using face = vec3<int>;
 
@@ -19,10 +19,10 @@ public:
 
 	int Draw();
 
-	void add_v(vec3<float> v);
-	void add_f(face f);
+	void add_vertex(Vertex v);
+	void add_face(face f);
 private:
-	std::vector<vec3<float>> v_;
+	std::vector<Vertex> vertices_;
 	std::vector<face> f_;
 
 	GLuint vao_;

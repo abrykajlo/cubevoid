@@ -1,3 +1,5 @@
+#include <algorithm>
+
 #include "mesh.hpp"
 
 Mesh::Mesh()
@@ -15,10 +17,13 @@ int Mesh::Init()
 
 	glGenBuffers(1, &vbo_);
 	glBindBuffer(GL_ARRAY_BUFFER, vbo_);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vec3<float>) * v_.size(), &v_[0], GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * vertices_.size(), &vertices_[0], GL_STATIC_DRAW);
 
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), 0);
 	glEnableVertexAttribArray(0);
+
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_TRUE, sizeof(Vertex), (void*)sizeof(vec3<float>));
+	glEnableVertexAttribArray(1);
 
 	glGenBuffers(1, &vio_);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vio_);
@@ -43,35 +48,46 @@ int Mesh::Draw()
 	return 0;
 }
 
-void Mesh::add_v(vec3<float> v)
+void Mesh::add_vertex(Vertex v)
 {
-	v_.push_back(v);
+	vertices_.push_back(v);
 }
 
-void Mesh::add_f(face f)
+void Mesh::add_face(face f)
 {
 	f_.push_back(f);
 }
 
 bool Parse(char * from, char * to, Mesh & mesh)
 {
-	vec3<float> v;
-	face f;
+	std::vector<Vertex> vertices;
+	std::vector<face> faces;
 	while (from != to)
 	{
 		switch (*from)
 		{
 		case 'v':
-			sscanf_s(from, "v %f %f %f", &v.x, &v.y, &v.z);
-			mesh.add_v(v);
+			Vertex vert;
+			vert.n = { 0, 0, 0 };
+			sscanf_s(from, "v %f %f %f", &vert.v.x, &vert.v.y, &vert.v.z);
+			vertices.push_back(vert);
 			break;
 		case 'f':
+			face f;
 			sscanf_s(from, "f %d %d %d", &f.x, &f.y, &f.z);
 			f.x -= 1; f.y -= 1; f.z -= 1;
-			mesh.add_f(f);
+			faces.push_back(f);
 		}
 		from++;
 	}
+
+	std::for_each(vertices.begin(), vertices.end(), [&mesh](Vertex& v) {
+		mesh.add_vertex(v);
+	});
+
+	std::for_each(faces.begin(), faces.end(), [&mesh](face& f) {
+		mesh.add_face(f);
+	});
 
 	return true;
 }

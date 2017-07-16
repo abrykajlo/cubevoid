@@ -128,6 +128,8 @@ int RenderManager::Render()
 	auto& eye = mainCamera_.eye;
 	eye = roty * eye;
 	
+	//set eye
+	glUniform3fv(1, 1, (GLfloat*)&eye);
 	//set camera projection
 	glUniformMatrix4fv(0, 1, GL_TRUE, (GLfloat*)&mainCamera_.ViewProjection());
 
