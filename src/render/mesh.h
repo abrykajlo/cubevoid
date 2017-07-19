@@ -1,10 +1,11 @@
 #pragma once
 
-#include <vector>
+#include <render/vertex.h>
 
 #include <GL/glew.h>
 
-#include "vertex.hpp"
+#include <vector>
+
 
 using face = vec3<int>;
 

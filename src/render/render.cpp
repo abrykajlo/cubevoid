@@ -5,17 +5,18 @@
 */
 
 
-#include <cstring>
-#include <cmath>
+#include "render.h"
+
+#include <core/file.h>
+#include <core/mat.h>
 
 #include <SDL2/SDL.h>
 #include <GL/glew.h>
 #include <GL/GL.h>
 
-#include <core/file.hpp>
-#include <core/mat.hpp>
+#include <cstring>
+#include <cmath>
 
-#include "render.hpp"
 
 RenderManager gRenderManager;
 

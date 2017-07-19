@@ -49,6 +49,9 @@
     <Filter Include="Source Files\render">
       <UniqueIdentifier>{b6aed540-2161-4080-813c-42ccbcf533a3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\3rd\glew">
+      <UniqueIdentifier>{a05a54ad-47cd-4295-9e4f-55b807517a69}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\3rd\GL\glew.h">
@@ -345,44 +348,44 @@
     <ClInclude Include="src\3rd\SDL2\SDL_video.h">
       <Filter>Header Files\3rd\SDL2</Filter>
     </ClInclude>
-    <ClInclude Include="src\core\file.hpp">
+    <ClInclude Include="src\core\file.h">
       <Filter>Header Files\core</Filter>
     </ClInclude>
-    <ClInclude Include="src\core\log.hpp">
+    <ClInclude Include="src\core\log.h">
       <Filter>Header Files\core</Filter>
     </ClInclude>
-    <ClInclude Include="src\core\mat.hpp">
+    <ClInclude Include="src\core\mat.h">
       <Filter>Header Files\core</Filter>
     </ClInclude>
-    <ClInclude Include="src\core\math.hpp">
+    <ClInclude Include="src\core\math.h">
       <Filter>Header Files\core</Filter>
     </ClInclude>
-    <ClInclude Include="src\core\util.hpp">
+    <ClInclude Include="src\core\util.h">
       <Filter>Header Files\core</Filter>
     </ClInclude>
-    <ClInclude Include="src\core\vec.hpp">
+    <ClInclude Include="src\core\vec.h">
       <Filter>Header Files\core</Filter>
     </ClInclude>
-    <ClInclude Include="src\simulation\simulation.hpp">
+    <ClInclude Include="src\render\camera.h">
+      <Filter>Header Files\render</Filter>
+    </ClInclude>
+    <ClInclude Include="src\render\mesh.h">
+      <Filter>Header Files\render</Filter>
+    </ClInclude>
+    <ClInclude Include="src\render\render.h">
+      <Filter>Header Files\render</Filter>
+    </ClInclude>
+    <ClInclude Include="src\render\shader.h">
+      <Filter>Header Files\render</Filter>
+    </ClInclude>
+    <ClInclude Include="src\render\shader_program.h">
+      <Filter>Header Files\render</Filter>
+    </ClInclude>
+    <ClInclude Include="src\render\vertex.h">
+      <Filter>Header Files\render</Filter>
+    </ClInclude>
+    <ClInclude Include="src\simulation\simulation.h">
       <Filter>Header Files\simulation</Filter>
-    </ClInclude>
-    <ClInclude Include="src\render\camera.hpp">
-      <Filter>Header Files\render</Filter>
-    </ClInclude>
-    <ClInclude Include="src\render\mesh.hpp">
-      <Filter>Header Files\render</Filter>
-    </ClInclude>
-    <ClInclude Include="src\render\render.hpp">
-      <Filter>Header Files\render</Filter>
-    </ClInclude>
-    <ClInclude Include="src\render\shader.hpp">
-      <Filter>Header Files\render</Filter>
-    </ClInclude>
-    <ClInclude Include="src\render\shader_program.hpp">
-      <Filter>Header Files\render</Filter>
-    </ClInclude>
-    <ClInclude Include="src\render\vertex.hpp">
-      <Filter>Header Files\render</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -514,6 +517,9 @@
     </ClCompile>
     <ClCompile Include="src\render\shader_program.cpp">
       <Filter>Source Files\render</Filter>
+    </ClCompile>
+    <ClCompile Include="src\3rd\GL\glew.c">
+      <Filter>Source Files\3rd\glew</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

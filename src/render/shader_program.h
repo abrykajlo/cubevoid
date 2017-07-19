@@ -7,10 +7,11 @@
 
 #pragma once
 
-#include <memory>
-#include <core/util.hpp>
+#include <core/util.h>
+#include <render/shader.h>
 
-#include "shader.hpp"
+#include <memory>
+
 
 class ShaderProgram
 {

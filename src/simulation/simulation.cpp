@@ -5,11 +5,12 @@
 */
 
 
+#include <render/render.h>
+#include <simulation/simulation.h>
+
 #include <SDL2/SDL_events.h>
 #include <SDL2/SDL.h>
-#include <render_manager/render.hpp>
 
-#include "simulation.hpp"
 
 SimulationManager::SimulationManager()
 {

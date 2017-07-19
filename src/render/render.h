@@ -7,12 +7,12 @@
 
 #pragma once
 
-#include <SDL2/SDL_video.h>
-#include <core/log.hpp>
-#include <core/mesh.hpp>
-#include <core/camera.hpp>
+#include <core/log.h>
+#include <render/mesh.h>
+#include <render/camera.h>
+#include <render/shader_program.h>
 
-#include "shader_program.hpp"
+#include <SDL2/SDL_video.h>
 
 
 class RenderManager

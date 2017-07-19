@@ -7,9 +7,10 @@
 
 #pragma once
 
+#include <core/file.h>
+
 #include <cstdio>
 
-#include "file.hpp"
 
 class Log
 {

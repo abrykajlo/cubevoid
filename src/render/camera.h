@@ -5,22 +5,24 @@
 */
 
 
-#include "log.h"
+#pragma once
 
-#include <cstdio>
+#include <core/vec.h>
+#include <core/mat.h>
 
 
-Log::Log(const char * fileName)
+class Camera
 {
-	file_.Open(fileName);
-}
+public:
+	Camera();
+	~Camera();
 
-Log::~Log()
-{
-	file_.Flush();
-}
+	mat4<float> ViewProjection();
+	
+	vec3<float> eye;
+	vec3<float> up;
+	vec3<float> at;
 
-int Log::Write(const char* line)
-{
-	return file_.Write(line);
-}
+private:
+	mat4<float> projection_;
+};

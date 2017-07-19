@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CubeVoid", "CubeVoid.vcxproj", "{3AE7C35D-9812-4B78-92FC-0580B801C81D}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CubeVoidGame", "games\cubevoid\CubeVoidGame.vcxproj", "{AB82F924-A7E9-4770-8D0D-9056E793000E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{3AE7C35D-9812-4B78-92FC-0580B801C81D} = {3AE7C35D-9812-4B78-92FC-0580B801C81D}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,22 +18,22 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{3AE7C35D-9812-4B78-92FC-0580B801C81D}.Debug|x64.ActiveCfg = Debug|x64
-		{3AE7C35D-9812-4B78-92FC-0580B801C81D}.Debug|x64.Build.0 = Debug|x64
-		{3AE7C35D-9812-4B78-92FC-0580B801C81D}.Debug|x86.ActiveCfg = Debug|x64
-		{3AE7C35D-9812-4B78-92FC-0580B801C81D}.Debug|x86.Build.0 = Debug|x64
+		{3AE7C35D-9812-4B78-92FC-0580B801C81D}.Debug|x64.ActiveCfg = Release|x64
+		{3AE7C35D-9812-4B78-92FC-0580B801C81D}.Debug|x64.Build.0 = Release|x64
+		{3AE7C35D-9812-4B78-92FC-0580B801C81D}.Debug|x86.ActiveCfg = Release|x64
+		{3AE7C35D-9812-4B78-92FC-0580B801C81D}.Debug|x86.Build.0 = Release|x64
 		{3AE7C35D-9812-4B78-92FC-0580B801C81D}.Release|x64.ActiveCfg = Release|x64
 		{3AE7C35D-9812-4B78-92FC-0580B801C81D}.Release|x64.Build.0 = Release|x64
-		{3AE7C35D-9812-4B78-92FC-0580B801C81D}.Release|x86.ActiveCfg = Release|Win32
-		{3AE7C35D-9812-4B78-92FC-0580B801C81D}.Release|x86.Build.0 = Release|Win32
-		{AB82F924-A7E9-4770-8D0D-9056E793000E}.Debug|x64.ActiveCfg = Debug|x64
-		{AB82F924-A7E9-4770-8D0D-9056E793000E}.Debug|x64.Build.0 = Debug|x64
-		{AB82F924-A7E9-4770-8D0D-9056E793000E}.Debug|x86.ActiveCfg = Debug|x64
-		{AB82F924-A7E9-4770-8D0D-9056E793000E}.Debug|x86.Build.0 = Debug|x64
+		{3AE7C35D-9812-4B78-92FC-0580B801C81D}.Release|x86.ActiveCfg = Release|x64
+		{3AE7C35D-9812-4B78-92FC-0580B801C81D}.Release|x86.Build.0 = Release|x64
+		{AB82F924-A7E9-4770-8D0D-9056E793000E}.Debug|x64.ActiveCfg = Release|x64
+		{AB82F924-A7E9-4770-8D0D-9056E793000E}.Debug|x64.Build.0 = Release|x64
+		{AB82F924-A7E9-4770-8D0D-9056E793000E}.Debug|x86.ActiveCfg = Release|x64
+		{AB82F924-A7E9-4770-8D0D-9056E793000E}.Debug|x86.Build.0 = Release|x64
 		{AB82F924-A7E9-4770-8D0D-9056E793000E}.Release|x64.ActiveCfg = Release|x64
 		{AB82F924-A7E9-4770-8D0D-9056E793000E}.Release|x64.Build.0 = Release|x64
-		{AB82F924-A7E9-4770-8D0D-9056E793000E}.Release|x86.ActiveCfg = Release|Win32
-		{AB82F924-A7E9-4770-8D0D-9056E793000E}.Release|x86.Build.0 = Release|Win32
+		{AB82F924-A7E9-4770-8D0D-9056E793000E}.Release|x86.ActiveCfg = Release|x64
+		{AB82F924-A7E9-4770-8D0D-9056E793000E}.Release|x86.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

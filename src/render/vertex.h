@@ -1,6 +1,6 @@
 #pragma once
 
-#include "vec.hpp"
+#include <core/vec.h>
 
 struct Vertex
 {

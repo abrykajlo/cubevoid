@@ -5,9 +5,10 @@
 */
 
 
+#include <simulation/simulation.h>
+
 #include <SDL2/SDL.h>
 
-#include "simulation.hpp"
 
 SimulationManager gSimulationManager;
 

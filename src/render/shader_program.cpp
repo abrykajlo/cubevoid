@@ -5,7 +5,8 @@
 */
 
 
-#include "shader_program.hpp"
+#include "shader_program.h"
+
 
 ShaderProgram::ShaderProgram()
 	: shaders_{nullptr},

@@ -5,9 +5,10 @@
 */
 
 
+#include "shader.h"
+
 #include <utility>
 
-#include "shader.hpp"
 
 Shader::Shader(ShaderType st) 
 	: shaderType_(st),

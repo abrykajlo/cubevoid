@@ -26,26 +26,26 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -75,14 +75,30 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(SolutionDir)src\;$(SolutionDir)src\3rd\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ExceptionHandling>false</ExceptionHandling>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <PreprocessorDefinitions>GLEW_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
+    <Lib>
+      <OutputFile>$(SolutionDir)lib\$(TargetName)$(TargetExt)</OutputFile>
+      <AdditionalOptions>-D_HAS_EXCEPTIONS=0 -D_STATIC_CPPLIB %(AdditionalOptions)</AdditionalOptions>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(SolutionDir)src\;$(SolutionDir)src\3rd\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ExceptionHandling>false</ExceptionHandling>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <PreprocessorDefinitions>GLEW_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
+    <Lib>
+      <OutputFile>$(SolutionDir)lib\$(TargetName)$(TargetExt)</OutputFile>
+      <AdditionalOptions>-D_HAS_EXCEPTIONS=0 -D_STATIC_CPPLIB %(AdditionalOptions)</AdditionalOptions>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -91,11 +107,19 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(SolutionDir)src\;$(SolutionDir)src\3rd\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ExceptionHandling>false</ExceptionHandling>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <PreprocessorDefinitions>GLEW_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
+    <Lib>
+      <OutputFile>$(SolutionDir)lib\$(TargetName)$(TargetExt)</OutputFile>
+      <AdditionalOptions>-D_HAS_EXCEPTIONS=0 -D_STATIC_CPPLIB %(AdditionalOptions)</AdditionalOptions>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -104,11 +128,19 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(SolutionDir)src\;$(SolutionDir)src\3rd\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ExceptionHandling>false</ExceptionHandling>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <PreprocessorDefinitions>GLEW_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
+    <Lib>
+      <OutputFile>$(SolutionDir)lib\$(TargetName)$(TargetExt)</OutputFile>
+      <AdditionalOptions>-D_HAS_EXCEPTIONS=0 -D_STATIC_CPPLIB %(AdditionalOptions)</AdditionalOptions>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="src\3rd\GL\glew.h" />
@@ -209,21 +241,22 @@
     <ClInclude Include="src\3rd\SDL2\SDL_types.h" />
     <ClInclude Include="src\3rd\SDL2\SDL_version.h" />
     <ClInclude Include="src\3rd\SDL2\SDL_video.h" />
-    <ClInclude Include="src\core\file.hpp" />
-    <ClInclude Include="src\core\log.hpp" />
-    <ClInclude Include="src\core\mat.hpp" />
-    <ClInclude Include="src\core\math.hpp" />
-    <ClInclude Include="src\core\util.hpp" />
-    <ClInclude Include="src\core\vec.hpp" />
-    <ClInclude Include="src\render\camera.hpp" />
-    <ClInclude Include="src\render\mesh.hpp" />
-    <ClInclude Include="src\render\render.hpp" />
-    <ClInclude Include="src\render\shader.hpp" />
-    <ClInclude Include="src\render\shader_program.hpp" />
-    <ClInclude Include="src\render\vertex.hpp" />
-    <ClInclude Include="src\simulation\simulation.hpp" />
+    <ClInclude Include="src\core\file.h" />
+    <ClInclude Include="src\core\log.h" />
+    <ClInclude Include="src\core\mat.h" />
+    <ClInclude Include="src\core\math.h" />
+    <ClInclude Include="src\core\util.h" />
+    <ClInclude Include="src\core\vec.h" />
+    <ClInclude Include="src\render\camera.h" />
+    <ClInclude Include="src\render\mesh.h" />
+    <ClInclude Include="src\render\render.h" />
+    <ClInclude Include="src\render\shader.h" />
+    <ClInclude Include="src\render\shader_program.h" />
+    <ClInclude Include="src\render\vertex.h" />
+    <ClInclude Include="src\simulation\simulation.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\3rd\GL\glew.c" />
     <ClCompile Include="src\3rd\lua\lapi.c" />
     <ClCompile Include="src\3rd\lua\lauxlib.c" />
     <ClCompile Include="src\3rd\lua\lbaselib.c" />
