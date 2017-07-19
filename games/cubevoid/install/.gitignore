@@ -1,0 +1,6 @@
+*.exe
+*.iobj
+*.ipdb
+*.pdb
+CubeVoid.exp
+CubeVoid.lib
