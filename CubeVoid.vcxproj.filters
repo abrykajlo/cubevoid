@@ -387,6 +387,9 @@
     <ClInclude Include="src\simulation\simulation.h">
       <Filter>Header Files\simulation</Filter>
     </ClInclude>
+    <ClInclude Include="src\core\quat.h">
+      <Filter>Header Files\core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\3rd\lua\lapi.c">
@@ -520,6 +523,9 @@
     </ClCompile>
     <ClCompile Include="src\3rd\GL\glew.c">
       <Filter>Source Files\3rd\glew</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\quat.cpp">
+      <Filter>Source Files\core</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
