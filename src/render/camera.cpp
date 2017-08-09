@@ -26,7 +26,7 @@ Camera::~Camera()
 {
 }
 
-mat4<float> Camera::ViewProjection()
+mat4 Camera::ViewProjection()
 {
 	return projection_ * LookAt(eye, at, up);
 }

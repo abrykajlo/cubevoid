@@ -7,8 +7,6 @@
 #include <vector>
 
 
-using face = vec3<int>;
-
 class Mesh
 {
 public:
@@ -21,10 +19,10 @@ public:
 	int Draw();
 
 	void add_vertex(Vertex v);
-	void add_face(face f);
+	void add_index(GLuint i);
 private:
 	std::vector<Vertex> vertices_;
-	std::vector<face> f_;
+	std::vector<GLuint> indices_;
 
 	GLuint vao_;
 	GLuint vbo_;

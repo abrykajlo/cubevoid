@@ -296,6 +296,7 @@
     <ClCompile Include="src\core\log.cpp" />
     <ClCompile Include="src\core\mat.cpp" />
     <ClCompile Include="src\core\quat.cpp" />
+    <ClCompile Include="src\core\vec.cpp" />
     <ClCompile Include="src\render\camera.cpp" />
     <ClCompile Include="src\render\mesh.cpp" />
     <ClCompile Include="src\render\render.cpp" />

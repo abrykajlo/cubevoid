@@ -14,11 +14,11 @@ quat operator*(quat& q1, quat& q2)
 
 quat quat_rotation(float theta, float ux, float uy, float uz)
 {
-	vec3<float> axis = { ux, uy, uz };
+	vec3 axis = { ux, uy, uz };
 	return quat_rotation(theta, axis);
 }
 
-quat quat_rotation(float theta, vec3<float>& axis)
+quat quat_rotation(float theta, vec3& axis)
 {
 	float halfSin = sinf(theta / 2);
 	float halfCos = cosf(theta / 2);
@@ -35,20 +35,20 @@ quat::quat(float i, float j, float k, float real)
 	: i(i), j(j), k(k), real(real)
 {}
 
-quat::quat(vec3<float>& v)
+quat::quat(vec3& v)
 	: i(v.x), j(v.y), k(v.z), real(0)
 {}
 
-quat::quat(vec4<float>& v)
+quat::quat(vec4& v)
 	: i(v.x), j(v.y), k(v.z), real(v.w)
 {}
 
-vec4<float> quat::ToVec4()
+vec4 quat::ToVec4()
 {
 	return { i, j, k, real };
 }
 
-vec3<float> quat::ToVec3()
+vec3 quat::ToVec3()
 {
 	return { i, j, k };
 }
