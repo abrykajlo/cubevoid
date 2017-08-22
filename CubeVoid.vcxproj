@@ -245,6 +245,7 @@
     <ClInclude Include="src\core\log.h" />
     <ClInclude Include="src\core\mat.h" />
     <ClInclude Include="src\core\math.h" />
+    <ClInclude Include="src\core\quat.h" />
     <ClInclude Include="src\core\util.h" />
     <ClInclude Include="src\core\vec.h" />
     <ClInclude Include="src\render\camera.h" />
@@ -294,6 +295,8 @@
     <ClCompile Include="src\3rd\lua\lzio.c" />
     <ClCompile Include="src\core\log.cpp" />
     <ClCompile Include="src\core\mat.cpp" />
+    <ClCompile Include="src\core\quat.cpp" />
+    <ClCompile Include="src\core\vec.cpp" />
     <ClCompile Include="src\render\camera.cpp" />
     <ClCompile Include="src\render\mesh.cpp" />
     <ClCompile Include="src\render\render.cpp" />

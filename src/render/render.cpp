@@ -8,7 +8,7 @@
 #include "render.h"
 
 #include <core/file.h>
-#include <core/mat.h>
+#include <core/quat.h>
 
 #include <SDL2/SDL.h>
 #include <GL/glew.h>
@@ -119,15 +119,11 @@ int RenderManager::Render()
 	//clear buffers
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	auto rad = 0.01;
-	mat3<float> roty = {
-		cosf(rad), 0, -sinf(rad),
-		0, 1, 0,
-		sinf(rad), 0, cosf(rad)
-	};
+	auto rad = 0.001f;
+	auto rot = quat_rotation(rad, 0, 1, 0);
 
 	auto& eye = mainCamera_.eye;
-	eye = roty * eye;
+	eye = (rot * quat(eye) * rot.Inverse()).ToVec3();
 	
 	//set eye
 	glUniform3fv(1, 1, (GLfloat*)&eye);

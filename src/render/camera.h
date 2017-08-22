@@ -17,12 +17,12 @@ public:
 	Camera();
 	~Camera();
 
-	mat4<float> ViewProjection();
+	mat4 ViewProjection();
 	
-	vec3<float> eye;
-	vec3<float> up;
-	vec3<float> at;
+	vec3 eye;
+	vec3 up;
+	vec3 at;
 
 private:
-	mat4<float> projection_;
+	mat4 projection_;
 };
