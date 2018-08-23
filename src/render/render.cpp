@@ -16,6 +16,7 @@
 
 #include <cstring>
 #include <cmath>
+#include <sstream>
 
 
 RenderManager gRenderManager;
@@ -94,8 +95,9 @@ int RenderManager::Init()
 	auto size = meshFile.Size();
 	char* fileContents = new char[size];
 	meshFile.Read(fileContents, size);
+	std::istringstream fileContentStream(std::string(fileContents, size));
 
-	if (!Parse(fileContents, fileContents + size - 1, mesh_))
+	if (!Parse(fileContentStream, mesh_))
 	{
 		log_->Write("unable to parse file");
 		return -1;

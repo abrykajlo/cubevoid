@@ -8,6 +8,7 @@
 #include "mesh.h"
 
 #include <algorithm>
+#include <istream>
 
 
 Mesh::Mesh()
@@ -56,48 +57,68 @@ int Mesh::Draw()
 	return 0;
 }
 
-void Mesh::add_vertex(Vertex v)
+void Mesh::add_vertices(std::vector<Vertex>&& v)
 {
-	vertices_.push_back(v);
+	vertices_ = v;
 }
 
-void Mesh::add_index(GLuint i)
+void Mesh::add_indices(std::vector<GLuint>&& is)
 {
-	indices_.push_back(i);
+	indices_ = is;
 }
 
-bool Parse(char * from, char * to, Mesh & mesh)
+bool Parse(std::basic_istream<char>& is, Mesh & mesh)
 {
 	std::vector<Vertex> vertices;
 	std::vector<GLuint> indices;
-	while (from != to)
+	int numVertices = 0;
+	int numIndices = 0;
+	char nextChar;
+	// check how many v and f there are naively
+	while (!is.eof())
 	{
-		switch (*from)
+		nextChar = is.get();
+		if (nextChar == 'v')
+		{
+			numVertices++;
+		}
+		else if (nextChar == 'f')
+		{
+			numIndices += 3;
+		}
+	}
+	is.clear();
+	is.seekg(0);
+	vertices.reserve(numVertices);
+	indices.reserve(numIndices);
+	Vertex vert;
+	while (!is.eof())
+	{
+		nextChar = is.get();
+		switch (nextChar)
 		{
 		case 'v':
-			Vertex vert;
 			vert.n = { 0, 0, 0 };
-			sscanf_s(from, "v %f %f %f", &vert.v.x, &vert.v.y, &vert.v.z);
+			is >> vert.v.x;
+			is >> vert.v.y;
+			is >> vert.v.z;
 			vertices.push_back(vert);
 			break;
 		case 'f':
 			GLuint p, q, r;
-			sscanf_s(from, "f %d %d %d", &p, &q, &r);
+			is >> p;
+			is >> q;
+			is >> r;
 			p--; q--; r--;
 			indices.push_back(p);
 			indices.push_back(q);
 			indices.push_back(r);
+			break;
 		}
-		from++;
 	}
 
-	std::for_each(vertices.begin(), vertices.end(), [&mesh](Vertex& v) {
-		mesh.add_vertex(v);
-	});
-
-	std::for_each(indices.begin(), indices.end(), [&mesh](GLuint i) {
-		mesh.add_index(i);
-	});
+	mesh.add_vertices(std::move(vertices));
+	mesh.add_indices(std::move(indices));
 
 	return true;
 }

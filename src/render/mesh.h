@@ -18,8 +18,8 @@ public:
 
 	int Draw();
 
-	void add_vertex(Vertex v);
-	void add_index(GLuint i);
+	void add_vertices(std::vector<Vertex>&& vs);
+	void add_indices(std::vector<GLuint>&& is);
 private:
 	std::vector<Vertex> vertices_;
 	std::vector<GLuint> indices_;
@@ -29,4 +29,4 @@ private:
 	GLuint vio_;
 };
 
-bool Parse(char* from, char* to, Mesh& mesh);
+bool Parse(std::basic_istream<char>& is, Mesh& mesh);
