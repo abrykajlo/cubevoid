@@ -14,6 +14,8 @@
 
 #include <SDL2/SDL_video.h>
 
+#include <chrono>
+
 
 class RenderManager
 {
@@ -33,6 +35,8 @@ private:
 	ShaderProgram* shaderProgram_;
 	Mesh mesh_; //bring mesh out into simulation
 	Camera mainCamera_;
+	std::chrono::high_resolution_clock clock_;
+	std::chrono::time_point<decltype(clock_)> lastTime_;
 
 	int InitShaders();
 };

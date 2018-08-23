@@ -104,6 +104,8 @@ int RenderManager::Init()
 	}
 	delete[] fileContents;
 	mesh_.Init();
+
+	lastTime_ = clock_.now();
 	return 0;
 }
 
@@ -118,22 +120,33 @@ int RenderManager::Quit()
 
 int RenderManager::Render()
 {
-	//clear buffers
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	auto now = clock_.now();
+	auto timeSinceLast = now - lastTime_;
+	std::chrono::milliseconds thirtyFPS(33);
+	std::chrono::seconds secondsPerRotation(10);
 
-	auto rad = 0.001f;
-	auto rot = quat_rotation(rad, 0, 1, 0);
+	if (timeSinceLast >= thirtyFPS)
+	{
+		//clear buffers
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	auto& eye = mainCamera_.eye;
-	eye = (rot * quat(eye) * rot.Inverse()).ToVec3();
-	
-	//set eye
-	glUniform3fv(1, 1, (GLfloat*)&eye);
-	//set camera projection
-	glUniformMatrix4fv(0, 1, GL_TRUE, (GLfloat*)&mainCamera_.ViewProjection());
+		// rotate at 1 rotation every x seconds
+		auto fractionOfFullRotation = secondsPerRotation / timeSinceLast;
+		float rad = 2.0f * M_PI / fractionOfFullRotation;
+		auto rot = quat_rotation(rad, 0, 1, 0);
 
-	mesh_.Draw();
-	SDL_GL_SwapWindow(window_);
+		auto& eye = mainCamera_.eye;
+		eye = (rot * quat(eye) * rot.Inverse()).ToVec3();
+
+		//set eye
+		glUniform3fv(1, 1, (GLfloat*)&eye);
+		//set camera projection
+		glUniformMatrix4fv(0, 1, GL_TRUE, (GLfloat*)&mainCamera_.ViewProjection());
+
+		mesh_.Draw();
+		SDL_GL_SwapWindow(window_);
+		lastTime_ = now;
+	}
 	return 0;
 }
 
