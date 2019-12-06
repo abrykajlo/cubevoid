@@ -1,0 +1,1 @@
+add_library(Core STATIC log.cpp mat.cpp quat.cpp vec.cpp)

@@ -1,0 +1,1 @@
+add_library(Render camera.cpp mesh.cpp render.cpp shader_program.cpp shader.cpp)
