@@ -2,7 +2,7 @@
 
 #include <cmath>
 
-quat operator*(quat& q1, quat& q2)
+quat operator*(const quat& q1, const quat& q2)
 {
 	return {
 		q1.j * q2.k - q1.k * q2.j + q1.i * q2.real + q1.real * q2.i,
@@ -35,11 +35,11 @@ quat::quat(float i, float j, float k, float real)
 	: i(i), j(j), k(k), real(real)
 {}
 
-quat::quat(vec3& v)
+quat::quat(const vec3& v)
 	: i(v.x), j(v.y), k(v.z), real(0)
 {}
 
-quat::quat(vec4& v)
+quat::quat(const vec4& v)
 	: i(v.x), j(v.y), k(v.z), real(v.w)
 {}
 

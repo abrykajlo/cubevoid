@@ -12,7 +12,7 @@
 
 #include <SDL2/SDL.h>
 #include <GL/glew.h>
-#include <GL/GL.h>
+#include <GL/gl.h>
 
 #include <cstring>
 #include <cmath>
@@ -141,7 +141,8 @@ int RenderManager::Render()
 		//set eye
 		glUniform3fv(1, 1, (GLfloat*)&eye);
 		//set camera projection
-		glUniformMatrix4fv(0, 1, GL_TRUE, (GLfloat*)&mainCamera_.ViewProjection());
+		mat4 projection = mainCamera_.ViewProjection();
+		glUniformMatrix4fv(0, 1, GL_TRUE, (GLfloat*)&projection);
 
 		mesh_.Draw();
 		SDL_GL_SwapWindow(window_);

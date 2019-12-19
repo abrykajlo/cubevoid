@@ -12,15 +12,15 @@
 
 Log::Log(const char * fileName)
 {
-	file_.Open(fileName);
+	m_file.Open(fileName);
 }
 
 Log::~Log()
 {
-	file_.Flush();
+	m_file.Flush();
 }
 
 int Log::Write(const char* line)
 {
-	return file_.Write(line);
+	return m_file.Write(line);
 }

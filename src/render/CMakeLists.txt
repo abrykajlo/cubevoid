@@ -1,5 +1,5 @@
 add_library(Render)
-target_include_directories(Render PRIVATE .. ../3rd)
+target_include_directories(Render PRIVATE .. /usr/include)
 target_sources(Render
     PRIVATE
         camera.cpp

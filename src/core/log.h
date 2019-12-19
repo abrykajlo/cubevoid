@@ -20,5 +20,5 @@ public:
 
 	int Write(const char* line);
 private:
-	DefaultWriteFile file_;
+	DefaultWriteFile m_file;
 };

@@ -40,7 +40,7 @@ mat4 eye()
 	};
 }
 
-mat4 operator*(const mat4 & M1, const mat4 & M2)
+mat4 operator*(const mat4& M1, const mat4& M2)
 {
 	return {
 		M1.m11*M2.m11 + M1.m12*M2.m21 + M1.m13*M2.m31 + M1.m14*M2.m41,
@@ -62,7 +62,7 @@ mat4 operator*(const mat4 & M1, const mat4 & M2)
 	};
 }
 
-vec3 operator*(const mat3 & M, const vec3 & v)
+vec3 operator*(const mat3& M, const vec3& v)
 {
 	return {
 		M.m11 * v.x + M.m12 * v.y + M.m13 * v.z,

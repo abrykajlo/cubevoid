@@ -18,7 +18,7 @@ public:
 private:
 	void Quit();
 
-	bool quit_;
+	bool m_quit;
 };
 
 int BigInit();

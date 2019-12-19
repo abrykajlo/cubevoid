@@ -24,5 +24,5 @@ public:
 	vec3 at;
 
 private:
-	mat4 projection_;
+	mat4 m_projection;
 };

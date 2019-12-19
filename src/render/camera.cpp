@@ -14,7 +14,7 @@ Camera::Camera()
 	at = { 0, 0, 0 };
 	up = { 0, 1, 0 };
 
-	projection_ = {
+	m_projection = {
 		0.1f, 0, 0, 0,
 		0, 0.1f, 0, 0,
 		0, 0, 0.1f, 0,
@@ -28,5 +28,5 @@ Camera::~Camera()
 
 mat4 Camera::ViewProjection()
 {
-	return projection_ * LookAt(eye, at, up);
+	return m_projection * LookAt(eye, at, up);
 }

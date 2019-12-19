@@ -5,7 +5,7 @@
 #include <GL/glew.h>
 
 #include <vector>
-
+#include <istream>
 
 class Mesh
 {
@@ -21,12 +21,12 @@ public:
 	void add_vertices(std::vector<Vertex>&& vs);
 	void add_indices(std::vector<GLuint>&& is);
 private:
-	std::vector<Vertex> vertices_;
-	std::vector<GLuint> indices_;
+	std::vector<Vertex> m_vertices;
+	std::vector<GLuint> m_indices;
 
-	GLuint vao_;
-	GLuint vbo_;
-	GLuint vio_;
+	GLuint m_vao;
+	GLuint m_vbo;
+	GLuint m_vio;
 };
 
 bool Parse(std::basic_istream<char>& is, Mesh& mesh);

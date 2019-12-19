@@ -24,7 +24,7 @@ SimulationManager::~SimulationManager()
 
 int SimulationManager::Run()
 {
-	while (!quit_)
+	while (!m_quit)
 	{
 		SDL_Event event;
 		while (SDL_PollEvent(&event))
@@ -50,7 +50,7 @@ int SimulationManager::Run()
 
 void SimulationManager::Quit()
 {
-	quit_ = true;
+	m_quit = true;
 }
 
 int BigInit()

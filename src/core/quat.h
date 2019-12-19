@@ -10,8 +10,8 @@ struct quat
 	float real;
 
 	quat(float i, float j, float k, float real);
-	quat(vec3& v);
-	quat(vec4& v);
+	quat(const vec3& v);
+	quat(const vec4& v);
 
 	//returns w = real
 	vec4 ToVec4();
@@ -22,7 +22,7 @@ struct quat
 	quat Inverse();
 };
 
-quat operator*(quat& q1, quat& q2);
+quat operator*(const quat& q1, const quat& q2);
 quat quat_rotation(float theta, float ux, float uy, float uz);
 quat quat_rotation(float theta, vec3& axis);
 //TODO: add euler angle conversion functions
