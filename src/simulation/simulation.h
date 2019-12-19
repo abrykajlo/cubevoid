@@ -13,6 +13,7 @@ public:
 	SimulationManager();
 	~SimulationManager();
 
+	static SimulationManager& GetInstance();
 	int Run();
 
 private:

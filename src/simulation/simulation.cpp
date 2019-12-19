@@ -22,6 +22,16 @@ SimulationManager::~SimulationManager()
 	//do nothing
 }
 
+SimulationManager& SimulationManager::GetInstance()
+{
+	static std::unique_ptr<SimulationManager> sSimulationManager = nullptr;
+	if (sSimulationManager == nullptr)
+	{
+		sSimulationManager = std::make_unique<SimulationManager>();
+	}
+	return *sSimulationManager.get();
+}
+
 int SimulationManager::Run()
 {
 	while (!m_quit)
@@ -42,7 +52,7 @@ int SimulationManager::Run()
 				}
 			}
 		}
-		gRenderManager.Render();
+		RenderManager::GetInstance().Render();
 	}
 
 	return 0;
@@ -55,7 +65,7 @@ void SimulationManager::Quit()
 
 int BigInit()
 {
-	if (gRenderManager.Init() < 0)
+	if (RenderManager::GetInstance().Init() < 0)
 	{
 		return -1;
 	}
@@ -70,7 +80,7 @@ int BigInit()
 
 int BigQuit()
 {
-	if (gRenderManager.Quit() < 0)
+	if (RenderManager::GetInstance().Quit() < 0)
 	{
 		return -1;
 	}

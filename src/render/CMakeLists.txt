@@ -1,7 +1,7 @@
-add_library(Render)
+add_library(Render STATIC)
 target_include_directories(Render PRIVATE .. /usr/include)
 target_sources(Render
-    PRIVATE
+    PUBLIC
         camera.cpp
         mesh.cpp
         render.cpp

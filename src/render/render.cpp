@@ -33,6 +33,16 @@ RenderManager::~RenderManager()
 	//do nothing
 }
 
+RenderManager& RenderManager::GetInstance()
+{
+	static std::unique_ptr<RenderManager> sRenderManager = nullptr;
+	if (sRenderManager == nullptr)
+	{
+		sRenderManager = std::make_unique<RenderManager>();
+	}
+	return *sRenderManager.get();
+}
+
 int RenderManager::Init()
 {
 	log_ = new Log("RenderManager.log");

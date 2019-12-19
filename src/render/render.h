@@ -23,6 +23,8 @@ public:
 	RenderManager();
 	~RenderManager();
 
+	static RenderManager& GetInstance(); 
+
 	int Init();
 	int Quit();
 
