@@ -8,8 +8,9 @@
 #include <render/render.h>
 #include <simulation/simulation.h>
 
-#include <SDL2/SDL_events.h>
-#include <SDL2/SDL.h>
+#include <GLFW/glfw3.h>
+
+#include <memory>
 
 
 SimulationManager::SimulationManager()
@@ -34,25 +35,10 @@ SimulationManager& SimulationManager::GetInstance()
 
 int SimulationManager::Run()
 {
-	while (!m_quit)
+	auto& renderManager = RenderManager::GetInstance();
+	while (!renderManager.Done())
 	{
-		SDL_Event event;
-		while (SDL_PollEvent(&event))
-		{
-			if (event.type == SDL_QUIT) 
-			{
-				Quit();
-			}
-
-			if (event.type == SDL_KEYDOWN) 
-			{
-				if (event.key.keysym.sym == SDLK_q)
-				{
-					Quit();
-				}
-			}
-		}
-		RenderManager::GetInstance().Render();
+		renderManager.Render();
 	}
 
 	return 0;
@@ -65,12 +51,12 @@ void SimulationManager::Quit()
 
 int BigInit()
 {
-	if (RenderManager::GetInstance().Init() < 0)
+	if (!glfwInit())
 	{
 		return -1;
 	}
 
-	if (SDL_Init(SDL_INIT_EVERYTHING) < 0)
+	if (RenderManager::GetInstance().Init() < 0)
 	{
 		return -1;
 	}
@@ -85,7 +71,7 @@ int BigQuit()
 		return -1;
 	}
 
-	SDL_Quit();
+	glfwTerminate();
 
 	return 0;
 }

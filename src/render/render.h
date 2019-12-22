@@ -10,13 +10,13 @@
 #include <core/log.h>
 #include <render/mesh.h>
 #include <render/camera.h>
-#include <render/shader_program.h>
 
-#include <SDL2/SDL_video.h>
+#include <GLFW/glfw3.h>
 
 #include <chrono>
 
-
+class GLFWwindow;
+class ShaderProgram;
 class RenderManager
 {
 public:
@@ -29,18 +29,19 @@ public:
 	int Quit();
 
 	int Render();
+	inline bool Done()
+	{
+		return glfwWindowShouldClose(m_window);
+	}
 private:
-	SDL_Window* window_;
-	SDL_GLContext context_;
-	bool initialized_;
-	Log* log_;
-	ShaderProgram* shaderProgram_;
-	Mesh mesh_; //bring mesh out into simulation
-	Camera mainCamera_;
-	std::chrono::high_resolution_clock clock_;
-	std::chrono::time_point<decltype(clock_)> lastTime_;
+	GLFWwindow* m_window = nullptr;
+	bool m_initialized = false;
+	Log* m_log = nullptr;
+	ShaderProgram* m_shaderProgram = nullptr;
+	Mesh m_mesh; //bring mesh out into simulation
+	Camera m_mainCamera;
+	std::chrono::high_resolution_clock m_clock;
+	std::chrono::time_point<decltype(m_clock)> m_lastTime;
 
 	int InitShaders();
 };
-
-extern RenderManager gRenderManager;

@@ -1,5 +1,5 @@
 add_library(Render STATIC)
-target_include_directories(Render PRIVATE .. /usr/include)
+target_include_directories(Render PRIVATE .. ${CONAN_INCLUDE_DIRS})
 target_sources(Render
     PUBLIC
         camera.cpp

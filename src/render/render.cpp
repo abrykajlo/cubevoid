@@ -9,28 +9,23 @@
 
 #include <core/file.h>
 #include <core/quat.h>
+#include <render/shader_program.h>
 
-#include <SDL2/SDL.h>
 #include <GL/glew.h>
 #include <GL/gl.h>
+#include <GLFW/glfw3.h>
 
 #include <cstring>
 #include <cmath>
 #include <sstream>
 
 
-RenderManager gRenderManager;
-
 RenderManager::RenderManager() 
-	: initialized_(false),
-	  log_(nullptr)
 {
-	//do nothing
 }
 
 RenderManager::~RenderManager()
 {
-	//do nothing
 }
 
 RenderManager& RenderManager::GetInstance()
@@ -45,39 +40,18 @@ RenderManager& RenderManager::GetInstance()
 
 int RenderManager::Init()
 {
-	log_ = new Log("RenderManager.log");
-
-	if (SDL_InitSubSystem(SDL_INIT_VIDEO) < 0)
-	{
-		return -1;
-	}
+	m_log = new Log("RenderManager.log");
 
 	//open window
-	window_ = SDL_CreateWindow("CubeVoid",
-		SDL_WINDOWPOS_CENTERED,
-		SDL_WINDOWPOS_CENTERED,
-		640,
-		480,
-		SDL_WINDOW_OPENGL);
-
-	if (window_ == nullptr)
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 5);
+	m_window = glfwCreateWindow(640, 480, "CubeVoid", nullptr, nullptr);
+	if (m_window == nullptr)
 	{
 		return -1;
 	}
 
-	//setup OpenGL version and context profile
-	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 4);
-	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 4);
-	SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
-	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
-
-	//create context for window
-	context_ = SDL_GL_CreateContext(window_);
-
-	if (context_ == nullptr)
-	{
-		return -1;
-	}
+	glfwSwapInterval(1);
 
 	//init glew and check for success
 	if (glewInit() != GLEW_OK)
@@ -85,11 +59,8 @@ int RenderManager::Init()
 		return -1;
 	}
 
-	SDL_GL_SetSwapInterval(1);
-
-	SDL_ShowWindow(window_);
 	glClearColor(0, 0, 0, 1);
-	initialized_ = true;
+	m_initialized = true;
 
 	if (InitShaders() < 0)
 	{
@@ -107,31 +78,30 @@ int RenderManager::Init()
 	meshFile.Read(fileContents, size);
 	std::istringstream fileContentStream(std::string(fileContents, size));
 
-	if (!Parse(fileContentStream, mesh_))
+	if (!Parse(fileContentStream, m_mesh))
 	{
-		log_->Write("unable to parse file");
+		m_log->Write("unable to parse file");
 		return -1;
 	}
 	delete[] fileContents;
-	mesh_.Init();
+	m_mesh.Init();
 
-	lastTime_ = clock_.now();
+	m_lastTime = m_clock.now();
 	return 0;
 }
 
 int RenderManager::Quit()
 {
-	SDL_DestroyWindow(window_);
-	SDL_GL_DeleteContext(context_);
-	delete shaderProgram_;
-	mesh_.Quit();
+	glfwDestroyWindow(m_window);
+	delete m_shaderProgram;
+	m_mesh.Quit();
 	return 0;
 }
 
 int RenderManager::Render()
 {
-	auto now = clock_.now();
-	auto timeSinceLast = now - lastTime_;
+	auto now = m_clock.now();
+	auto timeSinceLast = now - m_lastTime;
 	std::chrono::milliseconds thirtyFPS(33);
 	std::chrono::seconds secondsPerRotation(10);
 
@@ -145,18 +115,18 @@ int RenderManager::Render()
 		float rad = 2.0f * M_PI / fractionOfFullRotation;
 		auto rot = quat_rotation(rad, 0, 1, 0);
 
-		auto& eye = mainCamera_.eye;
+		auto& eye = m_mainCamera.eye;
 		eye = (rot * quat(eye) * rot.Inverse()).ToVec3();
 
 		//set eye
 		glUniform3fv(1, 1, (GLfloat*)&eye);
 		//set camera projection
-		mat4 projection = mainCamera_.ViewProjection();
+		mat4 projection = m_mainCamera.ViewProjection();
 		glUniformMatrix4fv(0, 1, GL_TRUE, (GLfloat*)&projection);
 
-		mesh_.Draw();
-		SDL_GL_SwapWindow(window_);
-		lastTime_ = now;
+		m_mesh.Draw();
+		glfwSwapBuffers(m_window);
+		m_lastTime = now;
 	}
 	return 0;
 }
@@ -176,7 +146,7 @@ int RenderManager::InitShaders()
 	vertShader.SetSource(buf);
 	if (vertShader.Compile() < 0)
 	{
-		log_->Write(vertShader.GetError());
+		m_log->Write(vertShader.GetError());
 		return -1;
 	}
 
@@ -185,23 +155,23 @@ int RenderManager::InitShaders()
 	fragShader.SetSource(buf);
 	if (fragShader.Compile() < 0)
 	{
-		log_->Write(fragShader.GetError());
+		m_log->Write(fragShader.GetError());
 		return -1;
 	}
 
 	//set up shaderprogram
-	shaderProgram_ = new ShaderProgram();
-	shaderProgram_->AttachShader(&vertShader);
-	shaderProgram_->AttachShader(&fragShader);
-	if (shaderProgram_->Link() < 0)
+	m_shaderProgram = new ShaderProgram();
+	m_shaderProgram->AttachShader(&vertShader);
+	m_shaderProgram->AttachShader(&fragShader);
+	if (m_shaderProgram->Link() < 0)
 	{
-		log_->Write(shaderProgram_->GetError());
+		m_log->Write(m_shaderProgram->GetError());
 		return -1;
 	}
 	
 	vertShaderFile.Close();
 	fragShaderFile.Close();
 	
-	shaderProgram_->Use();
+	m_shaderProgram->Use();
 	return 0;
 }

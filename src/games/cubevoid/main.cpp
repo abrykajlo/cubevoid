@@ -7,10 +7,6 @@
 
 #include <simulation/simulation.h>
 
-#include <SDL2/SDL.h>
-
-
-SimulationManager gSimulationManager;
 
 int main(int argc, char** argv)
 {
@@ -20,7 +16,7 @@ int main(int argc, char** argv)
 		return -1;
 	}
 	//run main loop
-	gSimulationManager.Run();
+	SimulationManager::GetInstance().Run();
 	//Quit and catch errors
 	if (BigQuit() < 0)
 	{
