@@ -26,12 +26,12 @@ ShaderProgram::AttachShader(Shader* shader)
         return -1;
     }
 
-    if (m_shaders[shader->shaderType_]) {
-        glDetachShader(m_programId, m_shaders[shader->shaderType_]->shaderId_);
+    if (m_shaders[shader->m_shaderType]) {
+        glDetachShader(m_programId, m_shaders[shader->m_shaderType]->m_shaderId);
     }
 
-    glAttachShader(m_programId, shader->shaderId_);
-    m_shaders[shader->shaderType_].reset(shader);
+    glAttachShader(m_programId, shader->m_shaderId);
+    m_shaders[shader->m_shaderType].reset(shader);
     return 0;
 }
 

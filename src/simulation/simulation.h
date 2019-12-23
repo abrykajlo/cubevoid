@@ -4,18 +4,19 @@
 ** Written by Adam Brykajlo <adam.brykajlo@gmail.com>, June 2017
 */
 
-
 #pragma once
 
 class SimulationManager
 {
-public:
-	SimulationManager();
-	~SimulationManager();
+  public:
+    SimulationManager();
+    ~SimulationManager();
 
-	static SimulationManager& GetInstance();
-	int Run();
+    static SimulationManager& GetInstance();
+    int Run();
 };
 
-int BigInit();
-int BigQuit();
+int
+BigInit();
+int
+BigQuit();
