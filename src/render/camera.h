@@ -4,25 +4,23 @@
 ** Written by Adam Brykajlo <adam.brykajlo@gmail.com>, June 2017
 */
 
-
 #pragma once
 
-#include <core/vec.h>
 #include <core/mat.h>
-
+#include <core/vec.h>
 
 class Camera
 {
-public:
-	Camera();
-	~Camera();
+  public:
+    Camera();
+    ~Camera();
 
-	mat4 ViewProjection();
-	
-	vec3 eye;
-	vec3 up;
-	vec3 at;
+    mat4 ViewProjection();
 
-private:
-	mat4 m_projection;
+    vec3 eye;
+    vec3 up;
+    vec3 at;
+
+  private:
+    mat4 m_projection;
 };

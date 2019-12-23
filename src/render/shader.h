@@ -4,35 +4,36 @@
 ** Written by Adam Brykajlo <adam.brykajlo@gmail.com>, June 2017
 */
 
-
 #pragma once
 
 #include <GL/glew.h>
 
+#include <string>
+
 enum ShaderType
 {
-	VERTEX_SHADER = 0,
-	TESS_CONTROL_SHADER = 1,
-	TESS_EVALUATION_SHADER = 2,
-	GEOMETRY_SHADER = 3,
-	FRAGMENT_SHADER = 4,
-	COMPUTE_SHADER = 5
+    VERTEX_SHADER = 0,
+    TESS_CONTROL_SHADER = 1,
+    TESS_EVALUATION_SHADER = 2,
+    GEOMETRY_SHADER = 3,
+    FRAGMENT_SHADER = 4,
+    COMPUTE_SHADER = 5
 };
 
 class Shader
 {
-public:
-	friend class ShaderProgram;
+  public:
+    friend class ShaderProgram;
 
-	Shader(ShaderType st);
-	~Shader();
+    Shader(ShaderType st);
+    ~Shader();
 
-	void SetSource(const char* source);
-	int Compile();
-	const char* GetError();
-private:
-	ShaderType shaderType_;
-	GLuint shaderId_;
-	char* error_;
-	size_t errorLength_;
+    void SetSource(const char* source);
+    int Compile();
+    const char* GetError();
+
+  private:
+    ShaderType m_shaderType;
+    GLuint m_shaderId;
+    std::string m_error;
 };

@@ -4,7 +4,7 @@
 
 struct Vertex
 {
-	vec3 v;
-	vec3 n;
-	vec2 uv;
+    vec3 v;
+    vec3 n;
+    vec2 uv;
 };

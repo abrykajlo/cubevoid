@@ -4,35 +4,32 @@
 ** Written by Adam Brykajlo <adam.brykajlo@gmail.com>, June 2017
 */
 
-
 #pragma once
 
-template <class DataT>
+template<class DataT>
 struct Node
 {
-	DataT data;
-	Node* next;
+    DataT data;
+    Node* next;
 
-	Node();
-	Node(DataT data);
-	Node(DataT data, Node* next);
+    Node();
+    Node(DataT data);
+    Node(DataT data, Node* next);
 };
 
 template<class DataT>
-inline Node<DataT>::Node() : next(nullptr)
+inline Node<DataT>::Node()
+    : next(nullptr)
 {}
 
 template<class DataT>
 inline Node<DataT>::Node(DataT data)
-	: data(data),
-	  next(nullptr)
-{
-}
+    : data(data)
+    , next(nullptr)
+{}
 
 template<class DataT>
-inline Node<DataT>::Node(DataT data, Node * next)
-	: data(data),
-	  next(next)
-{
-}
-
+inline Node<DataT>::Node(DataT data, Node* next)
+    : data(data)
+    , next(next)
+{}

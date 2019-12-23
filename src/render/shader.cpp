@@ -4,92 +4,75 @@
 ** Written by Adam Brykajlo <adam.brykajlo@gmail.com>, June 2017
 */
 
-
 #include "shader.h"
 
 #include <utility>
 
-
-Shader::Shader(ShaderType st) 
-	: shaderType_(st),
-	  error_(nullptr)
+Shader::Shader(ShaderType st)
+    : m_shaderType(st)
 {
-	GLenum glShaderType;
-	switch (st)
-	{
-	case VERTEX_SHADER:
-		glShaderType = GL_VERTEX_SHADER;
-		break;
-	case TESS_CONTROL_SHADER:
-		glShaderType = GL_TESS_CONTROL_SHADER;
-		break;
-	case TESS_EVALUATION_SHADER:
-		glShaderType = GL_TESS_EVALUATION_SHADER;
-		break;
-	case GEOMETRY_SHADER:
-		glShaderType = GL_GEOMETRY_SHADER;
-		break;
-	case FRAGMENT_SHADER:
-		glShaderType = GL_FRAGMENT_SHADER;
-		break;
-	case COMPUTE_SHADER:
-		glShaderType = GL_COMPUTE_SHADER;
-		break;
-	}
-	shaderId_ = glCreateShader(glShaderType);
+    GLenum glShaderType;
+    switch (st) {
+        case VERTEX_SHADER:
+            glShaderType = GL_VERTEX_SHADER;
+            break;
+        case TESS_CONTROL_SHADER:
+            glShaderType = GL_TESS_CONTROL_SHADER;
+            break;
+        case TESS_EVALUATION_SHADER:
+            glShaderType = GL_TESS_EVALUATION_SHADER;
+            break;
+        case GEOMETRY_SHADER:
+            glShaderType = GL_GEOMETRY_SHADER;
+            break;
+        case FRAGMENT_SHADER:
+            glShaderType = GL_FRAGMENT_SHADER;
+            break;
+        case COMPUTE_SHADER:
+            glShaderType = GL_COMPUTE_SHADER;
+            break;
+    }
+    m_shaderId = glCreateShader(glShaderType);
 }
 
 Shader::~Shader()
 {
-	if (error_ != nullptr)
-	{
-		delete[] error_;
-	}
-
-	if (glIsShader(shaderId_))
-	{
-		glDeleteShader(shaderId_);
-	}
+    if (glIsShader(m_shaderId)) {
+        glDeleteShader(m_shaderId);
+    }
 }
 
-void Shader::SetSource(const char* source)
+void
+Shader::SetSource(const char* source)
 {
-	glShaderSource(shaderId_, 1, &source, nullptr);
+    glShaderSource(m_shaderId, 1, &source, nullptr);
 }
 
-int Shader::Compile()
+int
+Shader::Compile()
 {
-	GLint compileStatus = 0;
-	glCompileShader(shaderId_);
+    GLint compileStatus = 0;
+    glCompileShader(m_shaderId);
 
-	//check compile status
-	glGetShaderiv(shaderId_, GL_COMPILE_STATUS, &compileStatus);
-	if (!compileStatus)
-	{
-		return -1;
-	}
+    // check compile status
+    glGetShaderiv(m_shaderId, GL_COMPILE_STATUS, &compileStatus);
+    if (!compileStatus) {
+        return -1;
+    }
 
-	return 0;
+    return 0;
 }
 
-const char* Shader::GetError()
+const char*
+Shader::GetError()
 {
-	GLint length = 0;
-	glGetShaderiv(shaderId_, GL_INFO_LOG_LENGTH, &length);
-	if (length > 0)
-	{
-		if (errorLength_ < length)
-		{
-			delete[] error_;
-			errorLength_ = length;
-			error_ = new char[errorLength_];
-		}
-
-		glGetShaderInfoLog(shaderId_, length, nullptr, error_);
-		return error_;
-	}
-	else
-	{
-		return nullptr;
-	}
+    GLint length = 0;
+    glGetShaderiv(m_shaderId, GL_INFO_LOG_LENGTH, &length);
+    if (length > 0) {
+        m_error.reserve(length);
+        glGetShaderInfoLog(m_shaderId, length, nullptr, &m_error[0]);
+        return m_error.c_str();
+    } else {
+        return nullptr;
+    }
 }

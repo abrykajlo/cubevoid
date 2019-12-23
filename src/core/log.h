@@ -4,21 +4,20 @@
 ** Written by Adam Brykajlo <adam.brykajlo@gmail.com>, June 2017
 */
 
-
 #pragma once
 
 #include <core/file.h>
 
 #include <cstdio>
 
-
 class Log
 {
-public:
-	Log(const char* fileName);
-	~Log();
+  public:
+    Log(const char* fileName);
+    ~Log();
 
-	int Write(const char* line);
-private:
-	DefaultWriteFile m_file;
+    int Write(const char* line);
+
+  private:
+    DefaultWriteFile m_file;
 };

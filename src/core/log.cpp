@@ -4,23 +4,24 @@
 ** Written by Adam Brykajlo <adam.brykajlo@gmail.com>, June 2017
 */
 
-
 #include "log.h"
 
 #include <cstdio>
 
-
-Log::Log(const char * fileName)
+Log::Log(const char* fileName)
 {
-	m_file.Open(fileName);
+    m_file.Open(fileName);
 }
 
 Log::~Log()
 {
-	m_file.Flush();
+    m_file.Flush();
 }
 
-int Log::Write(const char* line)
+int
+Log::Write(const char* line)
 {
-	return m_file.Write(line);
+    int result = m_file.Write(line);
+    m_file.Flush();
+    return result;
 }

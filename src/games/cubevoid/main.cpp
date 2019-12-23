@@ -4,23 +4,20 @@
 ** Written by Adam Brykajlo <adam.brykajlo@gmail.com>, June 2017
 */
 
-
 #include <simulation/simulation.h>
 
-
-int main(int argc, char** argv)
+int
+main(int argc, char** argv)
 {
-	//Initialize and catch errors
-	if (BigInit() < 0)
-	{
-		return -1;
-	}
-	//run main loop
-	SimulationManager::GetInstance().Run();
-	//Quit and catch errors
-	if (BigQuit() < 0)
-	{
-		return -1;
-	}
-	return 0;
+    // Initialize and catch errors
+    if (BigInit() < 0) {
+        return -1;
+    }
+    // run main loop
+    SimulationManager::GetInstance().Run();
+    // Quit and catch errors
+    if (BigQuit() < 0) {
+        return -1;
+    }
+    return 0;
 }

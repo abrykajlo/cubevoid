@@ -15,11 +15,6 @@ public:
 
 	static SimulationManager& GetInstance();
 	int Run();
-
-private:
-	void Quit();
-
-	bool m_quit;
 };
 
 int BigInit();

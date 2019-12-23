@@ -4,7 +4,6 @@
 ** Written by Adam Brykajlo <adam.brykajlo@gmail.com>, June 2017
 */
 
-
 #include <render/render.h>
 #include <simulation/simulation.h>
 
@@ -12,66 +11,62 @@
 
 #include <memory>
 
-
-SimulationManager::SimulationManager()
+static void
+error_callback(int error, const char* description)
 {
-	//do nothing
+    fprintf(stderr, "Error: %s\n", description);
 }
 
-SimulationManager::~SimulationManager()
+SimulationManager::SimulationManager() {}
+
+SimulationManager::~SimulationManager() {}
+
+SimulationManager&
+SimulationManager::GetInstance()
 {
-	//do nothing
+    static std::unique_ptr<SimulationManager> s_simulationManager = nullptr;
+    if (s_simulationManager == nullptr) {
+        s_simulationManager = std::make_unique<SimulationManager>();
+    }
+    return *s_simulationManager.get();
 }
 
-SimulationManager& SimulationManager::GetInstance()
+int
+SimulationManager::Run()
 {
-	static std::unique_ptr<SimulationManager> sSimulationManager = nullptr;
-	if (sSimulationManager == nullptr)
-	{
-		sSimulationManager = std::make_unique<SimulationManager>();
-	}
-	return *sSimulationManager.get();
+    auto& renderManager = RenderManager::GetInstance();
+    while (!renderManager.Done()) {
+        glfwPollEvents();
+        renderManager.Render();
+    }
+
+    return 0;
 }
 
-int SimulationManager::Run()
+int
+BigInit()
 {
-	auto& renderManager = RenderManager::GetInstance();
-	while (!renderManager.Done())
-	{
-		renderManager.Render();
-	}
+    glfwSetErrorCallback(error_callback);
+    glewExperimental = true;
+    if (!glfwInit()) {
+        return -1;
+    }
 
-	return 0;
+    if (RenderManager::GetInstance().Init() < 0) {
+        return -1;
+    }
+
+    return 0;
 }
 
-void SimulationManager::Quit()
+int
+BigQuit()
 {
-	m_quit = true;
-}
+    if (RenderManager::GetInstance().Quit() < 0) {
+        return -1;
+    }
 
-int BigInit()
-{
-	if (!glfwInit())
-	{
-		return -1;
-	}
+    glfwTerminate();
 
-	if (RenderManager::GetInstance().Init() < 0)
-	{
-		return -1;
-	}
-
-	return 0;
-}
-
-int BigQuit()
-{
-	if (RenderManager::GetInstance().Quit() < 0)
-	{
-		return -1;
-	}
-
-	glfwTerminate();
-
-	return 0;
+    return 0;
 }

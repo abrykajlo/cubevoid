@@ -4,29 +4,31 @@
 
 #include <GL/glew.h>
 
-#include <vector>
 #include <istream>
+#include <vector>
 
 class Mesh
 {
-public:
-	Mesh();
-	~Mesh();
+  public:
+    Mesh();
+    ~Mesh();
 
-	int Init();
-	int Quit();
+    int Init();
+    int Quit();
 
-	int Draw();
+    int Draw();
 
-	void add_vertices(std::vector<Vertex>&& vs);
-	void add_indices(std::vector<GLuint>&& is);
-private:
-	std::vector<Vertex> m_vertices;
-	std::vector<GLuint> m_indices;
+    void add_vertices(std::vector<Vertex>&& vs);
+    void add_indices(std::vector<GLuint>&& is);
 
-	GLuint m_vao;
-	GLuint m_vbo;
-	GLuint m_vio;
+  private:
+    std::vector<Vertex> m_vertices;
+    std::vector<GLuint> m_indices;
+
+    GLuint m_vao;
+    GLuint m_vbo;
+    GLuint m_vio;
 };
 
-bool Parse(std::basic_istream<char>& is, Mesh& mesh);
+bool
+Parse(std::basic_istream<char>& is, Mesh& mesh);

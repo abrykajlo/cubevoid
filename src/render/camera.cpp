@@ -4,29 +4,21 @@
 ** Written by Adam Brykajlo <adam.brykajlo@gmail.com>, June 2017
 */
 
-
 #include "camera.h"
-
 
 Camera::Camera()
 {
-	eye = { 0, 1, 1 };
-	at = { 0, 0, 0 };
-	up = { 0, 1, 0 };
+    eye = { 0, 1, 1 };
+    at = { 0, 0, 0 };
+    up = { 0, 1, 0 };
 
-	m_projection = {
-		0.1f, 0, 0, 0,
-		0, 0.1f, 0, 0,
-		0, 0, 0.1f, 0,
-		0, 0, 0, 1
-	};
+    m_projection = { 0.1f, 0, 0, 0, 0, 0.1f, 0, 0, 0, 0, 0.1f, 0, 0, 0, 0, 1 };
 }
 
-Camera::~Camera()
-{
-}
+Camera::~Camera() {}
 
-mat4 Camera::ViewProjection()
+mat4
+Camera::ViewProjection()
 {
-	return m_projection * LookAt(eye, at, up);
+    return m_projection * LookAt(eye, at, up);
 }
