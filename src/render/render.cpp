@@ -17,6 +17,10 @@
 #include <cstring>
 #include <sstream>
 
+#ifdef WIN32
+#define M_PI 3.14159265358979323846264
+#endif
+
 static void
 error_callback(int error, const char* description)
 {
@@ -138,8 +142,18 @@ int
 RenderManager::InitShaders()
 {
     m_log->Write("Initializing Shaders\n");
-    DefaultReadFile vertShaderFile("./assets/shaders/shader.vert");
-    DefaultReadFile fragShaderFile("./assets/shaders/shader.frag");
+	DefaultReadFile vertShaderFile; 
+	if (vertShaderFile.Open("./assets/shaders/shader.vert") < 0)
+	{
+		m_log->Write("Failed to open vertex shader file\n");
+		return -1;
+	}
+	DefaultReadFile fragShaderFile; 
+	if (fragShaderFile.Open("./assets/shaders/shader.frag") < 0)
+	{
+		m_log->Write("Failed to open fragment shader file\n");
+		return -1;
+	}
 
     Shader vertShader(VERTEX_SHADER);
     Shader fragShader(FRAGMENT_SHADER);

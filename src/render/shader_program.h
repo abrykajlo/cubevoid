@@ -9,6 +9,7 @@
 #include <core/util.h>
 #include <render/shader.h>
 
+#include <array>
 #include <memory>
 
 class ShaderProgram
