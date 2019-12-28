@@ -17,13 +17,13 @@ class ShaderProgram
     ShaderProgram();
     ~ShaderProgram();
 
-    int AttachShader(Shader* shader);
+    int AttachShader(const Shader& shader);
     int Link();
     void Use();
     const char* GetError();
 
   private:
-    std::array<std::unique_ptr<Shader>, 6> m_shaders;
+    std::array<std::unique_ptr<const Shader>, 6> m_shaders;
 
     GLuint m_programId;
     std::string m_error;

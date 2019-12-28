@@ -6,6 +6,8 @@
 
 #include "shader.h"
 
+#include <glad/glad.h>
+
 #include <utility>
 
 Shader::Shader(ShaderType st)

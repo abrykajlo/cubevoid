@@ -10,8 +10,7 @@
 #include <core/quat.h>
 #include <render/shader_program.h>
 
-#include <GL/gl.h>
-#include <GL/glew.h>
+#include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
 #include <cmath>
@@ -42,12 +41,11 @@ int
 RenderManager::Init()
 {
     m_log = std::make_unique<Log>("RenderManager.log");
-    m_log->Write("write");
+
     // open window
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 5);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
     m_window = glfwCreateWindow(640, 480, "CubeVoid", nullptr, nullptr);
     if (m_window == nullptr) {
         return -1;
@@ -55,19 +53,23 @@ RenderManager::Init()
 
     glfwMakeContextCurrent(m_window);
     glfwSwapInterval(1);
-    m_log->Write("GLFW Success");
+    m_log->Write("GLFW Success\n");
     // init glew and check for success
-    if (glewInit() != GLEW_OK) {
-        m_log->Write("GLEW failed to initialize");
+    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
+        m_log->Write("GLAD failed to initialize\n");
         return -1;
     }
-    m_log->Write("GLEW initialized");
+    m_log->Write("GLAD initialized\n");
+
+    glViewport(0, 0, 640, 480);
     glClearColor(0, 0, 0, 1);
     m_initialized = true;
 
     if (InitShaders() < 0) {
+        m_log->Write("Failed to initialize shaders\n");
         return -1;
     }
+    m_log->Write("Shaders initialized\n");
     // not sure if this is the right place for this
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LESS);
@@ -135,6 +137,7 @@ RenderManager::Render()
 int
 RenderManager::InitShaders()
 {
+    m_log->Write("Initializing Shaders\n");
     DefaultReadFile vertShaderFile("./assets/shaders/shader.vert");
     DefaultReadFile fragShaderFile("./assets/shaders/shader.frag");
 
@@ -150,6 +153,7 @@ RenderManager::InitShaders()
         m_log->Write(vertShader.GetError());
         return -1;
     }
+    m_log->Write("Vertex Shader compiled successfully\n");
 
     memset(buf, 0, 1024);
     fragShaderFile.Read(buf, 1024);
@@ -158,17 +162,17 @@ RenderManager::InitShaders()
         m_log->Write(fragShader.GetError());
         return -1;
     }
+    m_log->Write("Fragment Shader compiled successfully\n");
 
     // set up shaderprogram
-    m_shaderProgram->AttachShader(&vertShader);
-    m_shaderProgram->AttachShader(&fragShader);
+    m_shaderProgram = std::make_unique<ShaderProgram>();
+    m_shaderProgram->AttachShader(vertShader);
+    m_shaderProgram->AttachShader(fragShader);
     if (m_shaderProgram->Link() < 0) {
         m_log->Write(m_shaderProgram->GetError());
         return -1;
     }
-
-    vertShaderFile.Close();
-    fragShaderFile.Close();
+    m_log->Write("Shader program linked successfully\n");
 
     m_shaderProgram->Use();
     return 0;

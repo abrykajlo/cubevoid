@@ -1,4 +1,1 @@
-mkdir _builds
-cd _builds
-conan install ..
-cmake -S.. -G"Unix Makefiles"
+cmake -B_builds -G"Unix Makefiles" -DCMAKE_BUILD_TYPE=Debug

@@ -6,6 +6,8 @@
 
 #include "shader_program.h"
 
+#include <iostream>
+
 ShaderProgram::ShaderProgram()
     : m_shaders{ nullptr }
 {
@@ -20,18 +22,14 @@ ShaderProgram::~ShaderProgram()
 }
 
 int
-ShaderProgram::AttachShader(Shader* shader)
+ShaderProgram::AttachShader(const Shader& shader)
 {
-    if (!shader) {
-        return -1;
-    }
+    // if (m_shaders[shader.m_shaderType].get() != nullptr) {
+    //     glDetachShader(m_programId, m_shaders[shader.m_shaderType]->m_shaderId);
+    // }
+    glAttachShader(m_programId, shader.m_shaderId);
 
-    if (m_shaders[shader->m_shaderType]) {
-        glDetachShader(m_programId, m_shaders[shader->m_shaderType]->m_shaderId);
-    }
-
-    glAttachShader(m_programId, shader->m_shaderId);
-    m_shaders[shader->m_shaderType].reset(shader);
+    //m_shaders[shader.m_shaderType].reset(&shader);
     return 0;
 }
 

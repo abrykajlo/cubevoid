@@ -47,7 +47,6 @@ int
 BigInit()
 {
     glfwSetErrorCallback(error_callback);
-    glewExperimental = true;
     if (!glfwInit()) {
         return -1;
     }
